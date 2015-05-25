@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import "HomeViewController.h"
+#import "Constant.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface AppDelegate ()
@@ -21,6 +24,38 @@
     
     //facebook
     [FBLoginView class];
+    
+    //Set navigation
+//    UINavigationBar* navAppearance = [UINavigationBar appearance];
+//    [navAppearance setBarTintColor:UIColorFromRGB(0xffcd00)];
+//    
+//    UINavigationBar *navbar = [UINavigationBar appearance];
+//    [navbar setTintColor:[UIColor blackColor]];
+    
+    //Check Login or not
+    NSUserDefaults *defualt = [NSUserDefaults standardUserDefaults];
+    BOOL isLoggedIn = [defualt boolForKey:kUSER_LOGGED_IN];
+    
+    if(!isLoggedIn)
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+       
+        ViewController *loginView = [mainStoryboard instantiateViewControllerWithIdentifier:@"ViewController"];
+       
+        UINavigationController* navView = [[UINavigationController alloc]initWithRootViewController:loginView];
+        self.window.rootViewController = navView;
+        [self.window makeKeyAndVisible];
+        
+    }
+    else{
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        HomeViewController *homeView = [mainStoryboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+        UINavigationController* navView = [[UINavigationController alloc]initWithRootViewController:homeView];
+        self.window.rootViewController = navView;
+        [self.window makeKeyAndVisible];
+    }
+
 
     return YES;
 }

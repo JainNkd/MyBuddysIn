@@ -15,6 +15,19 @@
 		870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870729F31B111A7100C6FBAF /* LaunchScreen.xib */; };
 		87072A011B111A7100C6FBAF /* BuddysINTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87072A001B111A7100C6FBAF /* BuddysINTests.m */; };
 		87072A0B1B111E6B00C6FBAF /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */; };
+		87F04CD41B1374D900085DB4 /* buddysin-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCA1B1374D900085DB4 /* buddysin-29@2x.png */; };
+		87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCB1B1374D900085DB4 /* buddysin-29@3x.png */; };
+		87F04CD61B1374D900085DB4 /* buddysin-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCC1B1374D900085DB4 /* buddysin-40@2x.png */; };
+		87F04CD71B1374D900085DB4 /* buddysin-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCD1B1374D900085DB4 /* buddysin-40@3x.png */; };
+		87F04CD81B1374D900085DB4 /* buddysin-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCE1B1374D900085DB4 /* buddysin-60@2x.png */; };
+		87F04CD91B1374D900085DB4 /* buddysin-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCF1B1374D900085DB4 /* buddysin-60@3x.png */; };
+		87F04CDA1B1374D900085DB4 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CD11B1374D900085DB4 /* login_bg@2x.png */; };
+		87F04CDB1B1374D900085DB4 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CD21B1374D900085DB4 /* logo@2x.png */; };
+		87F04CDC1B1374D900085DB4 /* register-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CD31B1374D900085DB4 /* register-bg@2x.png */; };
+		87F04CE01B1383A700085DB4 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F04CDF1B1383A700085DB4 /* HomeViewController.m */; };
+		87F04CE41B13851D00085DB4 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F04CE31B13851D00085DB4 /* Constant.m */; };
+		87F04CE71B13962500085DB4 /* TermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F04CE61B13962500085DB4 /* TermsViewController.m */; };
+		87F04CEA1B139FF800085DB4 /* BuddysINUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F04CE91B139FF800085DB4 /* BuddysINUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +55,23 @@
 		870729FF1B111A7100C6FBAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87072A001B111A7100C6FBAF /* BuddysINTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuddysINTests.m; sourceTree = "<group>"; };
 		87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		87F04CCA1B1374D900085DB4 /* buddysin-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-29@2x.png"; sourceTree = "<group>"; };
+		87F04CCB1B1374D900085DB4 /* buddysin-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-29@3x.png"; sourceTree = "<group>"; };
+		87F04CCC1B1374D900085DB4 /* buddysin-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-40@2x.png"; sourceTree = "<group>"; };
+		87F04CCD1B1374D900085DB4 /* buddysin-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-40@3x.png"; sourceTree = "<group>"; };
+		87F04CCE1B1374D900085DB4 /* buddysin-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-60@2x.png"; sourceTree = "<group>"; };
+		87F04CCF1B1374D900085DB4 /* buddysin-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-60@3x.png"; sourceTree = "<group>"; };
+		87F04CD11B1374D900085DB4 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
+		87F04CD21B1374D900085DB4 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		87F04CD31B1374D900085DB4 /* register-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-bg@2x.png"; sourceTree = "<group>"; };
+		87F04CDE1B1383A700085DB4 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		87F04CDF1B1383A700085DB4 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		87F04CE21B13851D00085DB4 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		87F04CE31B13851D00085DB4 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		87F04CE51B13962500085DB4 /* TermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsViewController.h; sourceTree = "<group>"; };
+		87F04CE61B13962500085DB4 /* TermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsViewController.m; sourceTree = "<group>"; };
+		87F04CE81B139FF800085DB4 /* BuddysINUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuddysINUtil.h; sourceTree = "<group>"; };
+		87F04CE91B139FF800085DB4 /* BuddysINUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuddysINUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +114,8 @@
 		870729E31B111A7100C6FBAF /* BuddysIN */ = {
 			isa = PBXGroup;
 			children = (
+				87F04CE11B13850500085DB4 /* Common */,
+				87F04CC81B1374D900085DB4 /* Images */,
 				87072A0F1B111FA800C6FBAF /* StoryBoard */,
 				87072A0E1B111F8D00C6FBAF /* ViewController */,
 				87072A0D1B111F8500C6FBAF /* Domain */,
@@ -141,6 +173,10 @@
 			children = (
 				870729EB1B111A7100C6FBAF /* ViewController.h */,
 				870729EC1B111A7100C6FBAF /* ViewController.m */,
+				87F04CDE1B1383A700085DB4 /* HomeViewController.h */,
+				87F04CDF1B1383A700085DB4 /* HomeViewController.m */,
+				87F04CE51B13962500085DB4 /* TermsViewController.h */,
+				87F04CE61B13962500085DB4 /* TermsViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -153,6 +189,49 @@
 				870729F31B111A7100C6FBAF /* LaunchScreen.xib */,
 			);
 			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		87F04CC81B1374D900085DB4 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				87F04CC91B1374D900085DB4 /* Icon */,
+				87F04CD01B1374D900085DB4 /* Login */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		87F04CC91B1374D900085DB4 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				87F04CCA1B1374D900085DB4 /* buddysin-29@2x.png */,
+				87F04CCB1B1374D900085DB4 /* buddysin-29@3x.png */,
+				87F04CCC1B1374D900085DB4 /* buddysin-40@2x.png */,
+				87F04CCD1B1374D900085DB4 /* buddysin-40@3x.png */,
+				87F04CCE1B1374D900085DB4 /* buddysin-60@2x.png */,
+				87F04CCF1B1374D900085DB4 /* buddysin-60@3x.png */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
+		87F04CD01B1374D900085DB4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				87F04CD11B1374D900085DB4 /* login_bg@2x.png */,
+				87F04CD21B1374D900085DB4 /* logo@2x.png */,
+				87F04CD31B1374D900085DB4 /* register-bg@2x.png */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		87F04CE11B13850500085DB4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				87F04CE21B13851D00085DB4 /* Constant.h */,
+				87F04CE31B13851D00085DB4 /* Constant.m */,
+				87F04CE81B139FF800085DB4 /* BuddysINUtil.h */,
+				87F04CE91B139FF800085DB4 /* BuddysINUtil.m */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,8 +314,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87F04CD91B1374D900085DB4 /* buddysin-60@3x.png in Resources */,
+				87F04CDB1B1374D900085DB4 /* logo@2x.png in Resources */,
+				87F04CD71B1374D900085DB4 /* buddysin-40@3x.png in Resources */,
 				870729F01B111A7100C6FBAF /* Main.storyboard in Resources */,
+				87F04CD41B1374D900085DB4 /* buddysin-29@2x.png in Resources */,
+				87F04CD61B1374D900085DB4 /* buddysin-40@2x.png in Resources */,
+				87F04CDA1B1374D900085DB4 /* login_bg@2x.png in Resources */,
+				87F04CD81B1374D900085DB4 /* buddysin-60@2x.png in Resources */,
+				87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */,
 				870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */,
+				87F04CDC1B1374D900085DB4 /* register-bg@2x.png in Resources */,
 				870729F21B111A7100C6FBAF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,9 +343,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87F04CE71B13962500085DB4 /* TermsViewController.m in Sources */,
+				87F04CEA1B139FF800085DB4 /* BuddysINUtil.m in Sources */,
 				870729ED1B111A7100C6FBAF /* ViewController.m in Sources */,
 				870729EA1B111A7100C6FBAF /* AppDelegate.m in Sources */,
 				870729E71B111A7100C6FBAF /* main.m in Sources */,
+				87F04CE41B13851D00085DB4 /* Constant.m in Sources */,
+				87F04CE01B1383A700085DB4 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +408,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -336,6 +429,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -357,7 +451,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -370,6 +465,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -379,6 +475,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuddysIN",
@@ -386,6 +484,7 @@
 				INFOPLIST_FILE = BuddysIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -394,6 +493,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuddysIN",
@@ -401,6 +502,7 @@
 				INFOPLIST_FILE = BuddysIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

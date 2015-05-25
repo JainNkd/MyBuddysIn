@@ -13,5 +13,12 @@
 
 @property (weak, nonatomic) IBOutlet FBLoginView *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *fbButton;
+@property (weak, nonatomic) IBOutlet UILabel *termsLBL;
+@property (weak, nonatomic) IBOutlet UIImageView *fbImageBG;
+@property (weak, nonatomic) IBOutlet UIButton *termsButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *fbLBL;
+
+- (IBAction)termsButtonClicked:(UIButton *)sender;
 @end
 
