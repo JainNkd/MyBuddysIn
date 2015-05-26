@@ -46,6 +46,18 @@
 		8B0792FA1B142B68002CF70F /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0792E71B142B68002CF70F /* SBJsonParser.m */; };
 		8B0792FB1B142B68002CF70F /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0792E91B142B68002CF70F /* SBJsonWriter.m */; };
 		8B0792FF1B142B8D002CF70F /* ConnectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0792FE1B142B8D002CF70F /* ConnectionHandler.m */; };
+		8B07931A1B148991002CF70F /* button_add&bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B07930F1B148991002CF70F /* button_add&bg@2x.png */; };
+		8B07931B1B148991002CF70F /* button_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793101B148991002CF70F /* button_plus@2x.png */; };
+		8B07931C1B148991002CF70F /* iphone-home-v1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793111B148991002CF70F /* iphone-home-v1_1.png */; };
+		8B07931D1B148991002CF70F /* iphone-login-changes&font-size.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793121B148991002CF70F /* iphone-login-changes&font-size.png */; };
+		8B07931E1B148991002CF70F /* message_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793131B148991002CF70F /* message_bg@2x.png */; };
+		8B07931F1B148991002CF70F /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793141B148991002CF70F /* nav-bar@2x.png */; };
+		8B0793201B148991002CF70F /* red-button-login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793151B148991002CF70F /* red-button-login@2x.png */; };
+		8B0793211B148991002CF70F /* redbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793161B148991002CF70F /* redbg@2x.png */; };
+		8B0793221B148991002CF70F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793181B148991002CF70F /* Default-568h@2x.png */; };
+		8B0793231B148991002CF70F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793191B148991002CF70F /* Default@2x.png */; };
+		8B07932A1B148D67002CF70F /* facebook-login-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793281B148D67002CF70F /* facebook-login-bg@2x.png */; };
+		8B07932B1B148D67002CF70F /* facebook-login-effectbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793291B148D67002CF70F /* facebook-login-effectbg@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +141,18 @@
 		8B0792E91B142B68002CF70F /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		8B0792FD1B142B8D002CF70F /* ConnectionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionHandler.h; sourceTree = "<group>"; };
 		8B0792FE1B142B8D002CF70F /* ConnectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionHandler.m; sourceTree = "<group>"; };
+		8B07930F1B148991002CF70F /* button_add&bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_add&bg@2x.png"; sourceTree = "<group>"; };
+		8B0793101B148991002CF70F /* button_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus@2x.png"; sourceTree = "<group>"; };
+		8B0793111B148991002CF70F /* iphone-home-v1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-home-v1_1.png"; sourceTree = "<group>"; };
+		8B0793121B148991002CF70F /* iphone-login-changes&font-size.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-login-changes&font-size.png"; sourceTree = "<group>"; };
+		8B0793131B148991002CF70F /* message_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_bg@2x.png"; sourceTree = "<group>"; };
+		8B0793141B148991002CF70F /* nav-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar@2x.png"; sourceTree = "<group>"; };
+		8B0793151B148991002CF70F /* red-button-login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button-login@2x.png"; sourceTree = "<group>"; };
+		8B0793161B148991002CF70F /* redbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redbg@2x.png"; sourceTree = "<group>"; };
+		8B0793181B148991002CF70F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8B0793191B148991002CF70F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8B0793281B148D67002CF70F /* facebook-login-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-bg@2x.png"; sourceTree = "<group>"; };
+		8B0793291B148D67002CF70F /* facebook-login-effectbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-effectbg@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +276,8 @@
 		87F04CC81B1374D900085DB4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8B07930E1B148991002CF70F /* Screen2 */,
+				8B0793171B148991002CF70F /* Splash */,
 				87F04CC91B1374D900085DB4 /* Icon */,
 				87F04CD01B1374D900085DB4 /* Login */,
 			);
@@ -275,6 +301,8 @@
 			isa = PBXGroup;
 			children = (
 				87F04CD11B1374D900085DB4 /* login_bg@2x.png */,
+				8B0793281B148D67002CF70F /* facebook-login-bg@2x.png */,
+				8B0793291B148D67002CF70F /* facebook-login-effectbg@2x.png */,
 				87F04CD21B1374D900085DB4 /* logo@2x.png */,
 				87F04CD31B1374D900085DB4 /* register-bg@2x.png */,
 			);
@@ -362,6 +390,30 @@
 			name = LIB;
 			sourceTree = "<group>";
 		};
+		8B07930E1B148991002CF70F /* Screen2 */ = {
+			isa = PBXGroup;
+			children = (
+				8B07930F1B148991002CF70F /* button_add&bg@2x.png */,
+				8B0793101B148991002CF70F /* button_plus@2x.png */,
+				8B0793111B148991002CF70F /* iphone-home-v1_1.png */,
+				8B0793121B148991002CF70F /* iphone-login-changes&font-size.png */,
+				8B0793131B148991002CF70F /* message_bg@2x.png */,
+				8B0793141B148991002CF70F /* nav-bar@2x.png */,
+				8B0793151B148991002CF70F /* red-button-login@2x.png */,
+				8B0793161B148991002CF70F /* redbg@2x.png */,
+			);
+			path = Screen2;
+			sourceTree = "<group>";
+		};
+		8B0793171B148991002CF70F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				8B0793181B148991002CF70F /* Default-568h@2x.png */,
+				8B0793191B148991002CF70F /* Default@2x.png */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -445,16 +497,28 @@
 			files = (
 				87F04CD91B1374D900085DB4 /* buddysin-60@3x.png in Resources */,
 				87F04CDB1B1374D900085DB4 /* logo@2x.png in Resources */,
+				8B07931B1B148991002CF70F /* button_plus@2x.png in Resources */,
+				8B07931E1B148991002CF70F /* message_bg@2x.png in Resources */,
+				8B07931C1B148991002CF70F /* iphone-home-v1_1.png in Resources */,
+				8B0793221B148991002CF70F /* Default-568h@2x.png in Resources */,
+				8B07932A1B148D67002CF70F /* facebook-login-bg@2x.png in Resources */,
 				87F04CD71B1374D900085DB4 /* buddysin-40@3x.png in Resources */,
 				870729F01B111A7100C6FBAF /* Main.storyboard in Resources */,
 				87F04CD41B1374D900085DB4 /* buddysin-29@2x.png in Resources */,
+				8B0793201B148991002CF70F /* red-button-login@2x.png in Resources */,
 				87F04CD61B1374D900085DB4 /* buddysin-40@2x.png in Resources */,
 				87F04CDA1B1374D900085DB4 /* login_bg@2x.png in Resources */,
 				87F04CD81B1374D900085DB4 /* buddysin-60@2x.png in Resources */,
+				8B07932B1B148D67002CF70F /* facebook-login-effectbg@2x.png in Resources */,
 				87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */,
+				8B0793211B148991002CF70F /* redbg@2x.png in Resources */,
 				870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */,
+				8B0793231B148991002CF70F /* Default@2x.png in Resources */,
 				87F04CDC1B1374D900085DB4 /* register-bg@2x.png in Resources */,
+				8B07931D1B148991002CF70F /* iphone-login-changes&font-size.png in Resources */,
 				870729F21B111A7100C6FBAF /* Images.xcassets in Resources */,
+				8B07931F1B148991002CF70F /* nav-bar@2x.png in Resources */,
+				8B07931A1B148991002CF70F /* button_add&bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: aumkii Unternehmergesellschaft haftungsbeschrankt (F9KDL972HX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: aumkii Unternehmergesellschaft haftungsbeschrankt (F9KDL972HX)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -640,6 +705,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: aumkii Unternehmergesellschaft haftungsbeschrankt (F9KDL972HX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: aumkii Unternehmergesellschaft haftungsbeschrankt (F9KDL972HX)";
 				FRAMEWORK_SEARCH_PATHS = (

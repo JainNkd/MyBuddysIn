@@ -39,14 +39,32 @@
     
     self.navigationController.navigationBarHidden = YES;
     //Set Delegate and facebook Permission
+
+    for (id obj in self.loginButton.subviews)
+    {
+        if ([obj isKindOfClass:[UIButton class]])
+        {
+            UIButton * loginButton =  obj;
+            UIImage *loginImage = [UIImage imageNamed:@"facebook-login-bg.png"];
+            UIImage *loginSelectedImage = [UIImage imageNamed:@"facebook-login-effectbg"];
+            [loginButton setBackgroundImage:loginImage forState:UIControlStateNormal];
+            [loginButton setBackgroundImage:loginSelectedImage forState:UIControlStateSelected];
+            [loginButton setBackgroundImage:loginSelectedImage forState:UIControlStateHighlighted];
+            [loginButton sizeToFit];
+        }
+        if ([obj isKindOfClass:[UILabel class]])
+        {
+            UILabel * loginLabel =  obj;
+            loginLabel.text = @"";
+            loginLabel.hidden = YES;
+            loginLabel.frame = CGRectMake(0, 0, 271, 37);
+        }
+    }
     
-    [self.loginButton setFrame:CGRectMake(self.loginButton.frame.origin.x, self.loginButton.frame.origin.y,320,100)];
+    
+    
     self.loginButton.delegate = self;
     self.loginButton.readPermissions = @[@"public_profile",@"email",@"user_friends"];
-    
-    //Set login button image
-    [self.loginButton addSubview:self.fbImageBG];
-    [self.loginButton addSubview:self.fbLBL];
     
     UIColor *redcolor = UIColorFromRGB(0xB40000);
     

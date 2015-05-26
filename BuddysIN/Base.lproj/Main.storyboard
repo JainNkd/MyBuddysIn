@@ -34,10 +34,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="yXx-0m-Rfp">
                                 <rect key="frame" x="15" y="12" width="86" height="22"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="register-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="xrm-Ar-K59">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="red-button-login.png" translatesAutoresizingMaskIntoConstraints="NO" id="xrm-Ar-K59">
                                 <rect key="frame" x="0.0" y="48" width="320" height="75"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCV-Yf-c5O">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCV-Yf-c5O">
                                 <rect key="frame" x="0.0" y="65" width="320" height="40"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="36"/>
                                 <color key="textColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
@@ -194,7 +194,7 @@
     <resources>
         <image name="login_bg.png" width="320" height="100"/>
         <image name="logo.png" width="87" height="22"/>
-        <image name="register-bg.png" width="320" height="75"/>
+        <image name="red-button-login.png" width="320" height="75"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
