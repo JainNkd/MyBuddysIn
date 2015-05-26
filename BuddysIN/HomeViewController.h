@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+- (IBAction)logOutButtonAction:(UIButton *)sender;
 
 @end

@@ -11,7 +11,6 @@
 @interface Constant : NSObject
 
 //Set color using Hexcode
-
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 //UserDefaults
@@ -26,7 +25,21 @@
 #define kUSER_LOGGED_IN @"USER_LOGGED_IN"
 
 
-extern const NSString * HOSTNAME;
-extern NSString * const LOGIN_URL;
+
+
+//web services
+#define kServerURL @"http://buddysin.aumkiiyo.com/api"
+#define kRegistrationURL @"http://buddysin.aumkiiyo.com/api/sync_user"
+
+#define kShareVideoURL @""
+
+//API
+#define kAPIKey @"api_key"
+#define kAPISecret @"api_secret"
+
+// API Values
+#define kAPIKeyValue @"AiK58j67"
+#define kAPISecretValue @"a#9rJkmbOea90-"
+
 
 @end

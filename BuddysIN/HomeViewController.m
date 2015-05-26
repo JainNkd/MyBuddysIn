@@ -7,6 +7,9 @@
 //
 
 #import "HomeViewController.h"
+#import "Constant.h"
+#import "ViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface HomeViewController ()
 
@@ -17,8 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBarHidden = YES;
     
-    
+    self.nameLabel.text = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME];
     // Do any additional setup after loading the view.
 }
 
@@ -37,4 +41,14 @@
 }
 */
 
+- (IBAction)logOutButtonAction:(UIButton *)sender {
+    [FBSession.activeSession closeAndClearTokenInformation];
+    FBSession.activeSession = nil;
+    
+    [[NSUserDefaults standardUserDefaults]setBool:FALSE forKey:kUSER_LOGGED_IN];
+    ViewController *loginView = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    
+    [self.navigationController pushViewController:loginView animated:YES];
+    
+}
 @end

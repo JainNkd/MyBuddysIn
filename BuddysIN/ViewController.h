@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "ConnectionHandler.h"
 
-@interface ViewController : UIViewController<FBLoginViewDelegate>
-
+@interface ViewController : UIViewController<FBLoginViewDelegate,ConnectionHandlerDelegate>
+{
+}
 @property (weak, nonatomic) IBOutlet FBLoginView *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *fbButton;
 @property (weak, nonatomic) IBOutlet UILabel *termsLBL;

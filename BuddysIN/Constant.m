@@ -11,7 +11,4 @@
 @implementation Constant
 
 
-const NSString *HOSTNAME = @"http://buddysin.aumkiiyo.com/api";
-NSString * const LOGIN_URL = @"%@/sync_user";
-
 @end

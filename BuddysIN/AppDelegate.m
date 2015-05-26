@@ -17,13 +17,17 @@
 @end
 
 @implementation AppDelegate
-
+@synthesize httpClient;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     //facebook
     [FBLoginView class];
+    
+    //http Client
+    NSURL *url = [NSURL URLWithString:kServerURL];
+    self.httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     //Set navigation
 //    UINavigationBar* navAppearance = [UINavigationBar appearance];
