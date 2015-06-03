@@ -23,6 +23,8 @@
 @protocol ConnectionHandlerDelegate <NSObject>
 @optional
 -(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseString:(NSString *)response forPath:(NSString *)urlPath;
+-(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseDict:(NSDictionary *)responseDict forPath:(NSString *)urlPath;
+
 -(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseStatus:(NSUInteger)status;
 -(void)connHandlerClient:(ConnectionHandler *)client didFailWithError:(NSError *)error;
 @end

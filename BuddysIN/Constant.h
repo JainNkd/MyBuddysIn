@@ -30,6 +30,7 @@
 //web services
 #define kServerURL @"http://buddysin.aumkiiyo.com/api"
 #define kRegistrationURL @"http://buddysin.aumkiiyo.com/api/sync_user"
+#define kNearByUserURL @"http://buddysin.aumkiiyo.com/api/nearby/share"
 
 #define kShareVideoURL @""
 

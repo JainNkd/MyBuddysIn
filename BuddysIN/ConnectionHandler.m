@@ -96,6 +96,11 @@
                 // NSLog(@"Request Successful, RegistrationURL response '%@'", responseString);
                 [self.delegate connHandlerClient:self didSucceedWithResponseStatus:statusInt];
              }
+             else if ([path isEqualToString:kNearByUserURL]) {
+             
+             // NSLog(@"Request Successful, kNearByUserURL response '%@'", responseString);
+             [self.delegate connHandlerClient:self didSucceedWithResponseString:responseString forPath:kNearByUserURL];
+         }
      } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          NSLog(@"[HTTPClient Error]: %@", error);
@@ -195,7 +200,7 @@
     [self.delegate connHandlerClient:self didSucceedWithResponseString:responseString forPath:urlPath];
 }
 
--(void)parseRecievedVideosResponse:(NSString *)responseString fromURL:(NSString *)urlPath{
+-(void)parseNearByBuddysResponse:(NSString *)responseString fromURL:(NSString *)urlPath{
     NSLog(@"parseShareVideoResponse : %@ for URL:%@",responseString,urlPath);
     
     [self.delegate connHandlerClient:self didSucceedWithResponseString:responseString forPath:urlPath];

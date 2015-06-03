@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ConnectionHandler.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController<ConnectionHandlerDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 - (IBAction)logOutButtonAction:(UIButton *)sender;

@@ -15,6 +15,12 @@
 		870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870729F31B111A7100C6FBAF /* LaunchScreen.xib */; };
 		87072A011B111A7100C6FBAF /* BuddysINTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87072A001B111A7100C6FBAF /* BuddysINTests.m */; };
 		87072A0B1B111E6B00C6FBAF /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */; };
+		87B41F991B1F84AC003ACCEE /* button_add&bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F931B1F84AC003ACCEE /* button_add&bg@2x.png */; };
+		87B41F9A1B1F84AC003ACCEE /* button_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F941B1F84AC003ACCEE /* button_plus@2x.png */; };
+		87B41F9B1B1F84AC003ACCEE /* iphone-home-v1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F951B1F84AC003ACCEE /* iphone-home-v1_1.png */; };
+		87B41F9C1B1F84AC003ACCEE /* message_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F961B1F84AC003ACCEE /* message_bg@2x.png */; };
+		87B41F9D1B1F84AC003ACCEE /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F971B1F84AC003ACCEE /* nav-bar@2x.png */; };
+		87B41F9E1B1F84AC003ACCEE /* redbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F981B1F84AC003ACCEE /* redbg@2x.png */; };
 		87F04CD41B1374D900085DB4 /* buddysin-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCA1B1374D900085DB4 /* buddysin-29@2x.png */; };
 		87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCB1B1374D900085DB4 /* buddysin-29@3x.png */; };
 		87F04CD61B1374D900085DB4 /* buddysin-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F04CCC1B1374D900085DB4 /* buddysin-40@2x.png */; };
@@ -85,6 +91,12 @@
 		870729FF1B111A7100C6FBAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87072A001B111A7100C6FBAF /* BuddysINTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuddysINTests.m; sourceTree = "<group>"; };
 		87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		87B41F931B1F84AC003ACCEE /* button_add&bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_add&bg@2x.png"; sourceTree = "<group>"; };
+		87B41F941B1F84AC003ACCEE /* button_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus@2x.png"; sourceTree = "<group>"; };
+		87B41F951B1F84AC003ACCEE /* iphone-home-v1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-home-v1_1.png"; sourceTree = "<group>"; };
+		87B41F961B1F84AC003ACCEE /* message_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_bg@2x.png"; sourceTree = "<group>"; };
+		87B41F971B1F84AC003ACCEE /* nav-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar@2x.png"; sourceTree = "<group>"; };
+		87B41F981B1F84AC003ACCEE /* redbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redbg@2x.png"; sourceTree = "<group>"; };
 		87F04CCA1B1374D900085DB4 /* buddysin-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-29@2x.png"; sourceTree = "<group>"; };
 		87F04CCB1B1374D900085DB4 /* buddysin-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-29@3x.png"; sourceTree = "<group>"; };
 		87F04CCC1B1374D900085DB4 /* buddysin-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buddysin-40@2x.png"; sourceTree = "<group>"; };
@@ -195,13 +207,12 @@
 		870729E31B111A7100C6FBAF /* BuddysIN */ = {
 			isa = PBXGroup;
 			children = (
+				87072A0C1B111F7200C6FBAF /* AppDelegate */,
 				8B0792FC1B142B76002CF70F /* LIB */,
 				87F04CE11B13850500085DB4 /* Common */,
-				87F04CC81B1374D900085DB4 /* Images */,
 				87072A0F1B111FA800C6FBAF /* StoryBoard */,
 				87072A0E1B111F8D00C6FBAF /* ViewController */,
 				87072A0D1B111F8500C6FBAF /* Domain */,
-				87072A0C1B111F7200C6FBAF /* AppDelegate */,
 				870729E41B111A7100C6FBAF /* Supporting Files */,
 			);
 			path = BuddysIN;
@@ -210,6 +221,7 @@
 		870729E41B111A7100C6FBAF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				87F04CC81B1374D900085DB4 /* Images */,
 				87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */,
 				870729E51B111A7100C6FBAF /* Info.plist */,
 				870729E61B111A7100C6FBAF /* main.m */,
@@ -273,9 +285,23 @@
 			name = StoryBoard;
 			sourceTree = "<group>";
 		};
+		87B41F921B1F84AC003ACCEE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				87B41F931B1F84AC003ACCEE /* button_add&bg@2x.png */,
+				87B41F941B1F84AC003ACCEE /* button_plus@2x.png */,
+				87B41F951B1F84AC003ACCEE /* iphone-home-v1_1.png */,
+				87B41F961B1F84AC003ACCEE /* message_bg@2x.png */,
+				87B41F971B1F84AC003ACCEE /* nav-bar@2x.png */,
+				87B41F981B1F84AC003ACCEE /* redbg@2x.png */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		87F04CC81B1374D900085DB4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				87B41F921B1F84AC003ACCEE /* Home */,
 				8B07930E1B148991002CF70F /* Screen2 */,
 				8B0793171B148991002CF70F /* Splash */,
 				87F04CC91B1374D900085DB4 /* Icon */,
@@ -498,9 +524,11 @@
 				87F04CD91B1374D900085DB4 /* buddysin-60@3x.png in Resources */,
 				87F04CDB1B1374D900085DB4 /* logo@2x.png in Resources */,
 				8B07931B1B148991002CF70F /* button_plus@2x.png in Resources */,
+				87B41F9E1B1F84AC003ACCEE /* redbg@2x.png in Resources */,
 				8B07931E1B148991002CF70F /* message_bg@2x.png in Resources */,
 				8B07931C1B148991002CF70F /* iphone-home-v1_1.png in Resources */,
 				8B0793221B148991002CF70F /* Default-568h@2x.png in Resources */,
+				87B41F9B1B1F84AC003ACCEE /* iphone-home-v1_1.png in Resources */,
 				8B07932A1B148D67002CF70F /* facebook-login-bg@2x.png in Resources */,
 				87F04CD71B1374D900085DB4 /* buddysin-40@3x.png in Resources */,
 				870729F01B111A7100C6FBAF /* Main.storyboard in Resources */,
@@ -511,12 +539,16 @@
 				87F04CD81B1374D900085DB4 /* buddysin-60@2x.png in Resources */,
 				8B07932B1B148D67002CF70F /* facebook-login-effectbg@2x.png in Resources */,
 				87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */,
+				87B41F9A1B1F84AC003ACCEE /* button_plus@2x.png in Resources */,
 				8B0793211B148991002CF70F /* redbg@2x.png in Resources */,
+				87B41F9D1B1F84AC003ACCEE /* nav-bar@2x.png in Resources */,
+				87B41F9C1B1F84AC003ACCEE /* message_bg@2x.png in Resources */,
 				870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */,
 				8B0793231B148991002CF70F /* Default@2x.png in Resources */,
 				87F04CDC1B1374D900085DB4 /* register-bg@2x.png in Resources */,
 				8B07931D1B148991002CF70F /* iphone-login-changes&font-size.png in Resources */,
 				870729F21B111A7100C6FBAF /* Images.xcassets in Resources */,
+				87B41F991B1F84AC003ACCEE /* button_add&bg@2x.png in Resources */,
 				8B07931F1B148991002CF70F /* nav-bar@2x.png in Resources */,
 				8B07931A1B148991002CF70F /* button_add&bg@2x.png in Resources */,
 			);
