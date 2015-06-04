@@ -194,6 +194,9 @@
                                         <state key="normal" image="button_add&amp;bg.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addVideoButtonAction:" destination="qTg-3Z-dTK" eventType="touchUpInside" id="Z7K-C9-eoI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -202,12 +205,15 @@
                                 <rect key="frame" x="0.0" y="125" width="320" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="210" id="XiH-hy-gwH">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="210" id="XiH-hy-gwH" customClass="HomeCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XiH-hy-gwH" id="Fv3-pz-g4W">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iphone-buddysin-icon3.png" translatesAutoresizingMaskIntoConstraints="NO" id="tQ0-xY-hyH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="message_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-J3-m89">
                                                     <rect key="frame" x="0.0" y="117" width="320" height="93"/>
                                                 </imageView>
@@ -237,6 +243,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buddyAuthName" destination="wvL-JV-mU0" id="HR2-O4-wVO"/>
+                                            <outlet property="buddysTitleLbl" destination="d6H-jD-Lgw" id="yvg-cf-ruK"/>
+                                            <outlet property="distanceLbl" destination="hKl-We-DkB" id="McC-j2-cOU"/>
+                                            <outlet property="thumbnailImage" destination="tQ0-xY-hyH" id="ZFI-Hq-mHa"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -248,6 +260,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="addVideoBtn" destination="1Ve-IZ-tAX" id="l4c-lj-GZd"/>
+                        <outlet property="nameLabel" destination="95I-10-QQs" id="JFr-WC-ygV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pke-mX-20N" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,6 +272,7 @@
     </scenes>
     <resources>
         <image name="button_add&amp;bg.png" width="75" height="75"/>
+        <image name="iphone-buddysin-icon3.png" width="320" height="320"/>
         <image name="login_bg.png" width="320" height="100"/>
         <image name="logo.png" width="87" height="22"/>
         <image name="message_bg.png" width="320" height="93"/>

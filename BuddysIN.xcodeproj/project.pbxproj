@@ -15,6 +15,10 @@
 		870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870729F31B111A7100C6FBAF /* LaunchScreen.xib */; };
 		87072A011B111A7100C6FBAF /* BuddysINTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87072A001B111A7100C6FBAF /* BuddysINTests.m */; };
 		87072A0B1B111E6B00C6FBAF /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */; };
+		87A6CEC21B20C9BE00422C4A /* iphone-buddysin-icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87A6CEC11B20C9BE00422C4A /* iphone-buddysin-icon3.png */; };
+		87A6CEC51B20CAB000422C4A /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6CEC41B20CAB000422C4A /* HomeCell.m */; };
+		87A6CEC81B20CD8700422C4A /* Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6CEC71B20CD8700422C4A /* Share.m */; };
+		87A6CECB1B20CD9B00422C4A /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6CECA1B20CD9B00422C4A /* Member.m */; };
 		87B41F991B1F84AC003ACCEE /* button_add&bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F931B1F84AC003ACCEE /* button_add&bg@2x.png */; };
 		87B41F9A1B1F84AC003ACCEE /* button_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F941B1F84AC003ACCEE /* button_plus@2x.png */; };
 		87B41F9B1B1F84AC003ACCEE /* iphone-home-v1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B41F951B1F84AC003ACCEE /* iphone-home-v1_1.png */; };
@@ -91,6 +95,13 @@
 		870729FF1B111A7100C6FBAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87072A001B111A7100C6FBAF /* BuddysINTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuddysINTests.m; sourceTree = "<group>"; };
 		87072A0A1B111E6B00C6FBAF /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		87A6CEC11B20C9BE00422C4A /* iphone-buddysin-icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-buddysin-icon3.png"; sourceTree = "<group>"; };
+		87A6CEC31B20CAB000422C4A /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
+		87A6CEC41B20CAB000422C4A /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
+		87A6CEC61B20CD8700422C4A /* Share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Share.h; sourceTree = "<group>"; };
+		87A6CEC71B20CD8700422C4A /* Share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Share.m; sourceTree = "<group>"; };
+		87A6CEC91B20CD9B00422C4A /* Member.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Member.h; sourceTree = "<group>"; };
+		87A6CECA1B20CD9B00422C4A /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
 		87B41F931B1F84AC003ACCEE /* button_add&bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_add&bg@2x.png"; sourceTree = "<group>"; };
 		87B41F941B1F84AC003ACCEE /* button_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus@2x.png"; sourceTree = "<group>"; };
 		87B41F951B1F84AC003ACCEE /* iphone-home-v1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone-home-v1_1.png"; sourceTree = "<group>"; };
@@ -258,6 +269,10 @@
 		87072A0D1B111F8500C6FBAF /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				87A6CEC61B20CD8700422C4A /* Share.h */,
+				87A6CEC71B20CD8700422C4A /* Share.m */,
+				87A6CEC91B20CD9B00422C4A /* Member.h */,
+				87A6CECA1B20CD9B00422C4A /* Member.m */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -269,6 +284,8 @@
 				870729EC1B111A7100C6FBAF /* ViewController.m */,
 				87F04CDE1B1383A700085DB4 /* HomeViewController.h */,
 				87F04CDF1B1383A700085DB4 /* HomeViewController.m */,
+				87A6CEC31B20CAB000422C4A /* HomeCell.h */,
+				87A6CEC41B20CAB000422C4A /* HomeCell.m */,
 				87F04CE51B13962500085DB4 /* TermsViewController.h */,
 				87F04CE61B13962500085DB4 /* TermsViewController.m */,
 			);
@@ -420,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				8B07930F1B148991002CF70F /* button_add&bg@2x.png */,
+				87A6CEC11B20C9BE00422C4A /* iphone-buddysin-icon3.png */,
 				8B0793101B148991002CF70F /* button_plus@2x.png */,
 				8B0793111B148991002CF70F /* iphone-home-v1_1.png */,
 				8B0793121B148991002CF70F /* iphone-login-changes&font-size.png */,
@@ -541,6 +559,7 @@
 				87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */,
 				87B41F9A1B1F84AC003ACCEE /* button_plus@2x.png in Resources */,
 				8B0793211B148991002CF70F /* redbg@2x.png in Resources */,
+				87A6CEC21B20C9BE00422C4A /* iphone-buddysin-icon3.png in Resources */,
 				87B41F9D1B1F84AC003ACCEE /* nav-bar@2x.png in Resources */,
 				87B41F9C1B1F84AC003ACCEE /* message_bg@2x.png in Resources */,
 				870729F51B111A7100C6FBAF /* LaunchScreen.xib in Resources */,
@@ -568,6 +587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A6CEC81B20CD8700422C4A /* Share.m in Sources */,
 				8B0792F21B142B68002CF70F /* AFURLConnectionOperation.m in Sources */,
 				8B0792EE1B142B68002CF70F /* AFImageRequestOperation.m in Sources */,
 				8B0792EB1B142B68002CF70F /* AFHTTPRequestOperation.m in Sources */,
@@ -578,6 +598,7 @@
 				870729ED1B111A7100C6FBAF /* ViewController.m in Sources */,
 				8B0792F91B142B68002CF70F /* SBJsonBase.m in Sources */,
 				870729EA1B111A7100C6FBAF /* AppDelegate.m in Sources */,
+				87A6CECB1B20CD9B00422C4A /* Member.m in Sources */,
 				8B0792F81B142B68002CF70F /* SBJSON.m in Sources */,
 				8B0792F61B142B68002CF70F /* NSObject+SBJSON.m in Sources */,
 				8B0792F51B142B68002CF70F /* Reachability.m in Sources */,
@@ -586,6 +607,7 @@
 				8B0792ED1B142B68002CF70F /* AFImageCache.m in Sources */,
 				87F04CE41B13851D00085DB4 /* Constant.m in Sources */,
 				87F04CE01B1383A700085DB4 /* HomeViewController.m in Sources */,
+				87A6CEC51B20CAB000422C4A /* HomeCell.m in Sources */,
 				8B0792F01B142B68002CF70F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8B0792EA1B142B68002CF70F /* AFHTTPClient.m in Sources */,
 				8B0792FB1B142B68002CF70F /* SBJsonWriter.m in Sources */,

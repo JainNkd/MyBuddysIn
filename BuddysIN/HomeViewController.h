@@ -12,6 +12,11 @@
 @interface HomeViewController : UIViewController<ConnectionHandlerDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *addVideoBtn;
+
+
+- (IBAction)addVideoButtonAction:(id)sender;
+
 - (IBAction)logOutButtonAction:(UIButton *)sender;
 
 @end
