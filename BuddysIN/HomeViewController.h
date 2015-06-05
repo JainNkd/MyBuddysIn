@@ -10,10 +10,17 @@
 #import "ConnectionHandler.h"
 
 @interface HomeViewController : UIViewController<ConnectionHandlerDelegate,UITableViewDataSource,UITableViewDelegate>
+{
+
+    NSMutableArray *buddysList;
+}
+
+@property(nonatomic,strong) NSMutableArray *buddysList;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *addVideoBtn;
 
+@property (weak, nonatomic) IBOutlet UITableView *buddysTableView;
 
 - (IBAction)addVideoButtonAction:(id)sender;
 

@@ -32,8 +32,11 @@
 #define kRegistrationURL @"http://buddysin.aumkiiyo.com/api/sync_user"
 #define kNearByUserURL @"http://buddysin.aumkiiyo.com/api/nearby/share"
 
-#define kShareVideoURL @""
+#define kShareVideoURL @"http://buddysin.aumkiiyo.com/pic/%@/share/%@"
+#define kShareImageURL @"http://buddysin.aumkiiyo.com/pic/%@/share/%@"
+#define kShareVideoThumbnailURL @"http://buddysin.aumkiiyo.com/pic/%@/share/thumb/%@"
 
+#define kDefaultImage @"iphone-buddysin-icon3.png"
 //API
 #define kAPIKey @"api_key"
 #define kAPISecret @"api_secret"

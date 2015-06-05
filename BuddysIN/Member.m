@@ -11,4 +11,17 @@
 @implementation Member
 @synthesize email,lat,lon,name;
 
+-(Member*)initWithDict:(NSDictionary*)memberDict
+{
+    if(self == [super init])
+    {
+        self.email = [memberDict valueForKey:@"email"];
+        self.lat = [memberDict valueForKey:@"lat"];
+        self.lon = [memberDict valueForKey:@"lon"];
+        self.name = [memberDict valueForKey:@"name"];
+        
+    }
+    return self;
+}
+
 @end

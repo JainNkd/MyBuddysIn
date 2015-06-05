@@ -11,4 +11,5 @@
 @interface Member : NSObject
 
 @property(nonatomic,strong)NSString *name,*email,*lat,*lon;
+-(Member*)initWithDict:(NSDictionary*)memberDict;
 @end

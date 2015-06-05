@@ -11,6 +11,8 @@
 
 @interface Share : NSObject
 
-@property(nonatomic,strong)NSString *memberID,*mid,*content,*imageURL,*videoURL,*videoThumbnail,*lat,*lon,*dataType,*distance;
+@property(nonatomic,strong)NSString *shareID,*mid,*content,*imageURL,*videoURL,*videoThumbnailURL,*lat,*lon,*dataType,*distance,*imageName,*videoName,*videoThumbnailName,*createTime;
 
+@property(nonatomic,strong)Member *memberDetail;
+-(Share*)initWithDict:(NSDictionary*)dataDict;
 @end

@@ -7,23 +7,27 @@
 //
 
 #import "HomeViewController.h"
+#import "UIImageView+AFNetworking.h"
 #import "Constant.h"
 #import "ViewController.h"
 #import "ConnectionHandler.h"
 #import "BuddysINUtil.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "HomeCell.h"
+#import "Share.h"
+
 @interface HomeViewController ()
 
 @end
 
 @implementation HomeViewController
-
+@synthesize buddysList;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    buddysList = [[NSMutableArray alloc]init];
     self.navigationController.navigationBarHidden = YES;
-    self.nameLabel.text = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME];
+    self.nameLabel.text = [NSString stringWithFormat:@"@%@",[[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME] ];
     
     
     [self getNearByRecords];
@@ -51,7 +55,7 @@
 #pragma mark - Connection
 
 -(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseString:(NSString *)response forPath:(NSString *)urlPath{
-        NSLog(@"connHandlerClient didSucceedWithResponseString : %@",response);
+    NSLog(@"connHandlerClient didSucceedWithResponseString : %@",response);
     NSLog(@"loadAppContactsOnTable ******************");
     if ([urlPath isEqualToString:kNearByUserURL]) {
         NSLog(@"SUCCESS: All Data fetched");
@@ -67,18 +71,20 @@
         switch (status) {
             case 1:
             {
-                for(NSDictionary* datadict in dataList)
+                [self.buddysList removeAllObjects];
+                for(NSDictionary* dataDict in dataList)
                 {
-//                    NSDictionary *videoDict = [datadict objectForKey:@"Video"];
-//                    VideoDetail *videoDetailObj = [[VideoDetail alloc]initWithDict:videoDict];
-//                    
-//                    if(![DatabaseMethods checkIfHistoryVideoExists:[videoDetailObj.videoID integerValue]])
-//                    {
-//                        [DatabaseMethods insertHistoryVideoInfoInDB:videoDetailObj];
-//                    }
+                    
+                    Share *shareObj = [[Share alloc]initWithDict:dataDict];
+                    [self.buddysList addObject:shareObj];
+                    
+                    //                    if(![DatabaseMethods checkIfHistoryVideoExists:[videoDetailObj.videoID integerValue]])
+                    //                    {
+                    //                        [DatabaseMethods insertHistoryVideoInfoInDB:videoDetailObj];
+                    //                    }
                 }
                 
-//                [self reloadHistoryData];
+                [self reloadHistoryData];
                 break;
             }
             case -2:
@@ -98,9 +104,16 @@
     [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
 }
 
+-(void)reloadHistoryData
+{
+    //    [buddysList removeAllObjects];
+    //    videoDetailsArr = [DatabaseMethods getAllHistoryVideos];
+    [self.buddysTableView reloadData];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [buddysList count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,8 +121,73 @@
     static NSString*CellIdentifier = @"Cell";
     
     HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    Share *shareObj = [buddysList objectAtIndex:indexPath.row];
+    
+    cell.buddyAuthName.text = shareObj.memberDetail.name;
+    cell.buddysTitleLbl.text = shareObj.content;
+    if(shareObj.distance.length>3)
+        cell.distanceLbl.text = [shareObj.distance substringToIndex:4];
+    else
+        cell.distanceLbl.text = [NSString stringWithFormat:@"%0.1f",[shareObj.distance floatValue]];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    __block NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath,*fileURL;
+    
+    if([shareObj.dataType integerValue] == 1){
+        fileURL = shareObj.imageURL;
+        filePath = [documentsDirectory stringByAppendingPathComponent:shareObj.imageName];}
+    else if([shareObj.dataType integerValue] == 2){
+        fileURL = shareObj.videoThumbnailURL;
+        filePath = [documentsDirectory stringByAppendingPathComponent:shareObj.videoThumbnailName];
+    }
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+        UIImage *image = [UIImage imageWithData:imageData];
+        if(image)
+            [cell.thumbnailImage setImage:image];
+        else
+            [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
+    }
+    else if(fileURL.length>0)
+    {
+        ConnectionHandler *conection = [[ConnectionHandler alloc]init];
+        if (![conection hasConnectivity]) {
+            [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
+        }
+        else
+        {
+            
+            [cell.thumbnailImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:fileURL]] placeholderImage:[UIImage imageNamed:kDefaultImage]
+                                                success:^(NSURLRequest *request , NSHTTPURLResponse *response , UIImage *image ){
+                                                    NSLog(@"Loaded successfully.....%@",[request.URL absoluteString]);// %ld", (long)[response statusCode]);
+                                                    
+                                                    NSArray *ary = [[request.URL absoluteString] componentsSeparatedByString:@"/"];
+                                                    NSString *filename = [ary lastObject];
+                                                    
+                                                    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:filename];
+                                                    //Add the file name
+                                                    NSData *pngData = UIImagePNGRepresentation(image);
+                                                    [pngData writeToFile:filePath atomically:YES];
+                                                    [self.buddysTableView reloadData];
+                                                }
+                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+                                                    NSLog(@"failed loading");//'%@", error);
+                                                    [self.buddysTableView reloadData];
+                                                }
+             ];
+        }
+    }else
+    {
+        [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
+    }
+    
+    
     return cell;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
