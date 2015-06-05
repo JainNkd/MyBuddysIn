@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "UCZProgressView.h";
+
 #import "ConnectionHandler.h"
 
-@interface HomeViewController : UIViewController<ConnectionHandlerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface HomeViewController : UIViewController<ConnectionHandlerDelegate,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
 {
 
     NSMutableArray *buddysList;
+    BOOL isReloadBuddys;
 }
 
 @property(nonatomic,strong) NSMutableArray *buddysList;

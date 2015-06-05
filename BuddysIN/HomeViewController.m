@@ -16,8 +16,13 @@
 #import "HomeCell.h"
 #import "Share.h"
 
-@interface HomeViewController ()
+#import "AppDelegate.h"
 
+
+@interface HomeViewController ()
+{
+UCZProgressView *progressView;
+}
 @end
 
 @implementation HomeViewController
@@ -25,29 +30,79 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    isReloadBuddys = TRUE;
+    
     buddysList = [[NSMutableArray alloc]init];
     self.navigationController.navigationBarHidden = YES;
     self.nameLabel.text = [NSString stringWithFormat:@"@%@",[[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME] ];
     
+    //Get Location
+    SharedAppDelegate.locationManager.delegate = self;
+    [SharedAppDelegate.locationManager startUpdatingLocation];
     
-    [self getNearByRecords];
+//    [self getNearByRecords];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Turn off the location manager to save power.
+    [SharedAppDelegate.locationManager stopUpdatingLocation];
+}
+
+#pragma mark - CLLocationManager delegate methods
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *newLocation = [locations lastObject];
+    NSString *locLat = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
+    NSString *locLong  = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
+    
+    [[NSUserDefaults standardUserDefaults]setValue:locLat forKey:kUSER_LATITUTE];
+    [[NSUserDefaults standardUserDefaults]setValue:locLong forKey:kUSER_LONGITUTE];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+     NSLog(@"locLat....%@,loclong....%@",locLat,locLong);
+    
+    if(isReloadBuddys)
+    {
+        [self getNearByRecords];
+        isReloadBuddys = FALSE;
+    }
+    
+    // Turn off the location manager to save power.
+    [SharedAppDelegate.locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+    NSLog(@"Cannot find the location.");
+    [[[UIAlertView alloc]initWithTitle:@"Opps." message:@"Can not find location." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Accept", nil] show];
 }
 
 -(void)getNearByRecords
 {
+    [self startProgressLoader];
+    NSString* latitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LATITUTE];
+    NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
+    NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:kAPIKeyValue forKey:kAPIKey];
     [dict setValue:kAPISecretValue forKey:kAPISecret];
-    [dict setValue:@"sekar@aumkii.com" forKey:@"email"];
-    [dict setValue:@"8.1" forKey:@"lat"];
-    [dict setValue:@"77.2" forKey:@"lon"];
+    [dict setValue:email forKey:@"email"];
+    [dict setValue:latitute forKey:@"lat"];
+    [dict setValue:longitute forKey:@"lon"];
     [dict setValue:@"50" forKey:@"radius"];
     [dict setValue:@"0" forKey:@"start"];
     [dict setValue:@"10" forKey:@"end"];
     
-    
+    NSLog(@"dict near by...%@",dict);
     ConnectionHandler *connHandler = [[ConnectionHandler alloc] init];
+    if(![connHandler hasConnectivity]){
+        [self stopProgressLoader];
+    }
     connHandler.delegate = self;
     [connHandler makePOSTRequestPath:kNearByUserURL parameters:dict];
 }
@@ -55,6 +110,7 @@
 #pragma mark - Connection
 
 -(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseString:(NSString *)response forPath:(NSString *)urlPath{
+    [self stopProgressLoader];
     NSLog(@"connHandlerClient didSucceedWithResponseString : %@",response);
     NSLog(@"loadAppContactsOnTable ******************");
     if ([urlPath isEqualToString:kNearByUserURL]) {
@@ -100,6 +156,7 @@
 
 -(void)connHandlerClient:(ConnectionHandler *)client didFailWithError:(NSError *)error
 {
+    [self stopProgressLoader];
     NSLog(@"didFailWithError:%@",[error localizedDescription]);
     [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
 }
@@ -206,5 +263,25 @@
     
     [self.navigationController pushViewController:loginView animated:YES];
     
+}
+
+-(void)startProgressLoader
+{
+    if(!progressView){
+    progressView = [[UCZProgressView alloc]initWithFrame:self.view.frame];
+    progressView.indeterminate = YES;
+    progressView.showsText = NO;
+    progressView.backgroundColor = [UIColor clearColor];
+    progressView.opaque = 0.5;
+    progressView.alpha = 0.5;
+    [self.view addSubview:progressView];
+    }
+}
+
+-(void)stopProgressLoader
+{
+    [progressView removeFromSuperview];
+    progressView = nil;
+
 }
 @end

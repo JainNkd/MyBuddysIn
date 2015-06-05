@@ -10,10 +10,15 @@
 #import <CoreLocation/CoreLocation.h>
 #import "AFHTTPClient.h"
 
+#define SharedAppDelegate ((AppDelegate*)[[UIApplication sharedApplication] delegate])
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property(nonatomic, strong) AFHTTPClient *httpClient;
+
+@property (nonatomic, retain) CLLocationManager *locationManager;
+
 
 @end
 

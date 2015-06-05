@@ -29,6 +29,16 @@
     NSURL *url = [NSURL URLWithString:kServerURL];
     self.httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
+    //Location Pop up
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        [self.locationManager requestWhenInUseAuthorization];
+    
+    
+    
     //Set navigation
 //    UINavigationBar* navAppearance = [UINavigationBar appearance];
 //    [navAppearance setBarTintColor:UIColorFromRGB(0xffcd00)];

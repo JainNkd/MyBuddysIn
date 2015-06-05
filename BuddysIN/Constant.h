@@ -45,5 +45,10 @@
 #define kAPIKeyValue @"AiK58j67"
 #define kAPISecretValue @"a#9rJkmbOea90-"
 
+//Locstion
+#define kUSER_LATITUTE @"lat"
+#define kUSER_LONGITUTE @"lon"
+
+
 
 @end

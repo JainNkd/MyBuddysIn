@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BuddysIN/HomeViewController.m"
-            timestampString = "455175659.48944"
+            timestampString = "455183218.079888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-getNearByRecords"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BuddysIN/HomeViewController.m"
-            timestampString = "455175659.48944"
+            timestampString = "455183485.497481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-connHandlerClient:didSucceedWithResponseString:forPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BuddysIN/HomeViewController.m"
-            timestampString = "455179927.021425"
+            timestampString = "455183485.497481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
