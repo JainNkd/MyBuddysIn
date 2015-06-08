@@ -119,9 +119,9 @@ static int initialPage = 1;
     NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
     NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
     
-//    email = @"naveendungarwal2009@gmail.com";
-//    latitute = @"12.938653";
-//    longitute = @"77.571814";
+    email = @"naveendungarwal2009@gmail.com";
+    latitute = @"12.938653";
+    longitute = @"77.571814";
     
     NSInteger start = _currentPage*5-5;
     NSInteger end = start+5;
@@ -306,9 +306,11 @@ static int initialPage = 1;
                                                     
                                                     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:filename];
                                                     //Add the file name
+                                                    if(image && filename.length>0){
                                                     NSData *pngData = UIImagePNGRepresentation(image);
                                                     [pngData writeToFile:filePath atomically:YES];
                                                     [self.buddysTableView reloadData];
+                                                    }
                                                 }
                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
                                                     NSLog(@"failed loading");//'%@", error);
