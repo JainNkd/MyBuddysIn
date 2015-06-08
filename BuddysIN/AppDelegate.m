@@ -45,7 +45,7 @@
     NSUserDefaults *defualt = [NSUserDefaults standardUserDefaults];
     BOOL isLoggedIn = [defualt boolForKey:kUSER_LOGGED_IN];
     
-    if(isLoggedIn)
+    if(!isLoggedIn)
     {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
        
