@@ -20,7 +20,9 @@
 
 #import "AppDelegate.h"
 #import "AFNetworking.h"
+#import "SVPullToRefresh.h"
 
+static int initialPage = 1;
 
 
 @interface HomeViewController ()
@@ -28,16 +30,22 @@
     UCZProgressView *progressView;
 }
 @property (nonatomic, strong) NSMutableDictionary *videoDownloadsInProgress;
+@property (nonatomic, assign) int currentPage;
+
 @end
 
 @implementation HomeViewController
 @synthesize buddysList;
+@synthesize currentPage = _currentPage;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     isReloadBuddys = TRUE;
     
     buddysList = [[NSMutableArray alloc]init];
+    self.currentPage = initialPage;
+
     self.navigationController.navigationBarHidden = YES;
     self.nameLabel.text = [NSString stringWithFormat:@"@%@",[[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME] ];
     
@@ -72,7 +80,24 @@
     
     if(isReloadBuddys)
     {
-        [self getNearByRecords];
+//        [self getNearByRecords];
+        [self startProgressLoader];
+        __weak HomeViewController *weakSelf = self;
+        
+        weakSelf.currentPage = initialPage; // reset the page
+        [weakSelf.buddysList removeAllObjects]; // remove all data
+        [weakSelf.buddysTableView reloadData]; // before load new content, clear the existing table list
+        [weakSelf getNearByRecords]; // load new data
+        [weakSelf.buddysTableView.pullToRefreshView stopAnimating]; // clear the animation
+        
+        // once refresh, allow the infinite scroll again
+        weakSelf.buddysTableView.showsInfiniteScrolling = YES;
+        
+        // load more content when scroll to the bottom most
+        [self.buddysTableView addInfiniteScrollingWithActionHandler:^{
+            [weakSelf getNearByRecords];
+        }];
+
         isReloadBuddys = FALSE;
     }
     
@@ -89,14 +114,19 @@
 
 -(void)getNearByRecords
 {
-    [self startProgressLoader];
+//    [self startProgressLoader];
     NSString* latitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LATITUTE];
     NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
     NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
     
-    email = @"naveendungarwal2009@gmail.com";
-    latitute = @"12.938653";
-    longitute = @"77.571814";
+//    email = @"naveendungarwal2009@gmail.com";
+//    latitute = @"12.938653";
+//    longitute = @"77.571814";
+    
+    NSInteger start = _currentPage*5-5;
+    NSInteger end = start+5;
+    NSLog(@"start...%d,,,End...%d",start,end);
+    
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:kAPIKeyValue forKey:kAPIKey];
     [dict setValue:kAPISecretValue forKey:kAPISecret];
@@ -104,8 +134,8 @@
     [dict setValue:latitute forKey:@"lat"];
     [dict setValue:longitute forKey:@"lon"];
     [dict setValue:@"99999" forKey:@"radius"];
-    [dict setValue:@"0" forKey:@"start"];
-    [dict setValue:@"50" forKey:@"end"];
+    [dict setValue:[NSString stringWithFormat:@"%d", start] forKey:@"start"];
+    [dict setValue:[NSString stringWithFormat:@"%d", end] forKey:@"end"];
     
     NSLog(@"dict near by...%@",dict);
     if(![BuddysINUtil reachable])
@@ -128,10 +158,21 @@
         NSInteger status = [[nearByBuddysDict objectForKey:@"status"] integerValue];
         NSArray *dataList = [nearByBuddysDict objectForKey:@"data"];
         
+        // if no more result
+        if ([[nearByBuddysDict objectForKey:@"data"] count] == 0) {
+            self.buddysTableView.showsInfiniteScrolling = NO; // stop the infinite scroll
+            return;
+        }
+        
+        _currentPage++; // increase the page number
+        NSInteger currentRow = [self.buddysList count]; // keep the the index of last row before add new items into the list
+
+
+        
         switch (status) {
             case 1:
             {
-                [self.buddysList removeAllObjects];
+//                [self.buddysList removeAllObjects];
                 for(NSDictionary* dataDict in dataList)
                 {
                     
@@ -144,7 +185,8 @@
                     //                    }
                 }
                 
-                [self reloadHistoryData];
+//                [self reloadHistoryData];
+                [self reloadTableView:currentRow];
                 break;
             }
             case -2:
@@ -155,10 +197,16 @@
                 break;
         }
         
+        // clear the pull to refresh & infinite scroll, this 2 lines very important
+        
+        [self.buddysTableView.pullToRefreshView stopAnimating];
+        [self.buddysTableView.infiniteScrollingView stopAnimating];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error %@", error);
-        
         [self stopProgressLoader];
+        self.buddysTableView.showsInfiniteScrolling = NO;
+        NSLog(@"error %@", error);
         NSLog(@"didFailWithError:%@",[error localizedDescription]);
         [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
     }];
@@ -171,6 +219,20 @@
     //    [buddysList removeAllObjects];
     //    videoDetailsArr = [DatabaseMethods getAllHistoryVideos];
     [self.buddysTableView reloadData];
+}
+
+- (void)reloadTableView:(NSInteger)startingRow;
+{
+    NSLog(@"curren row..%ld",(long)startingRow);
+    // the last row after added new items
+    NSInteger endingRow = [self.buddysList count];
+    
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    for (; startingRow < endingRow; startingRow++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:startingRow inSection:0]];
+    }
+    
+    [self.buddysTableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -68,6 +68,8 @@
 		8BF2A0D91B257CE400A61B54 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A0C61B257CE400A61B54 /* UIProgressView+AFNetworking.m */; };
 		8BF2A0DA1B257CE400A61B54 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A0C81B257CE400A61B54 /* UIRefreshControl+AFNetworking.m */; };
 		8BF2A0DB1B257CE400A61B54 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A0CA1B257CE400A61B54 /* UIWebView+AFNetworking.m */; };
+		8BF2A21D1B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A21A1B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.m */; };
+		8BF2A21E1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A21C1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.m */; };
 		8BFFAA2B1B217F9500D13C27 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BFFAA2A1B217F9500D13C27 /* CoreLocation.framework */; };
 		8BFFAA671B218A7E00D13C27 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFAA471B218A7E00D13C27 /* Reachability.m */; };
 		8BFFAA681B218A7E00D13C27 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFFAA4B1B218A7E00D13C27 /* NSObject+SBJSON.m */; };
@@ -185,6 +187,11 @@
 		8BF2A0C81B257CE400A61B54 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		8BF2A0C91B257CE400A61B54 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		8BF2A0CA1B257CE400A61B54 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		8BF2A2181B25A15100A61B54 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		8BF2A2191B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		8BF2A21A1B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		8BF2A21B1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		8BF2A21C1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		8BFFAA2A1B217F9500D13C27 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		8BFFAA461B218A7E00D13C27 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8BFFAA471B218A7E00D13C27 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -399,6 +406,7 @@
 		8B0792FC1B142B76002CF70F /* LIB */ = {
 			isa = PBXGroup;
 			children = (
+				8BF2A2171B25A15100A61B54 /* SVPullToRefresh */,
 				8BFFAA2C1B218A7D00D13C27 /* Connections */,
 				8BFFAA561B218A7E00D13C27 /* FXBlurView */,
 				8BFFAA591B218A7E00D13C27 /* Loading */,
@@ -481,6 +489,19 @@
 			);
 			name = "UIKit+AFNetworking";
 			path = "../../../../../../../../Downloads/AFNetworking-master/UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		8BF2A2171B25A15100A61B54 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				8BF2A2181B25A15100A61B54 /* SVPullToRefresh.h */,
+				8BF2A2191B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.h */,
+				8BF2A21A1B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.m */,
+				8BF2A21B1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.h */,
+				8BF2A21C1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.m */,
+			);
+			name = SVPullToRefresh;
+			path = Lib/SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 		8BFFAA2C1B218A7D00D13C27 /* Connections */ = {
@@ -681,6 +702,7 @@
 				87A6CEC81B20CD8700422C4A /* Share.m in Sources */,
 				8BF2A0D71B257CE400A61B54 /* UIButton+AFNetworking.m in Sources */,
 				87F04CE71B13962500085DB4 /* TermsViewController.m in Sources */,
+				8BF2A21E1B25A15100A61B54 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				87F04CEA1B139FF800085DB4 /* BuddysINUtil.m in Sources */,
 				8BF2A0D31B257CE400A61B54 /* AFURLSessionManager.m in Sources */,
 				8BFFAA6A1B218A7E00D13C27 /* SBJSON.m in Sources */,
@@ -691,6 +713,7 @@
 				8BF2A0D91B257CE400A61B54 /* UIProgressView+AFNetworking.m in Sources */,
 				8BF2A0CB1B257CE400A61B54 /* AFHTTPRequestOperation.m in Sources */,
 				870729ED1B111A7100C6FBAF /* ViewController.m in Sources */,
+				8BF2A21D1B25A15100A61B54 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				870729EA1B111A7100C6FBAF /* AppDelegate.m in Sources */,
 				87A6CECB1B20CD9B00422C4A /* Member.m in Sources */,
 				8BF2A0D41B257CE400A61B54 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -768,8 +791,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -789,7 +812,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -811,8 +834,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -825,7 +848,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -836,8 +859,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuddysIN",
@@ -845,7 +868,7 @@
 				INFOPLIST_FILE = BuddysIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -855,8 +878,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuddysIN",
@@ -864,7 +887,7 @@
 				INFOPLIST_FILE = BuddysIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -873,8 +896,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -886,7 +909,7 @@
 				INFOPLIST_FILE = BuddysINTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuddysIN.app/BuddysIN";
 			};
 			name = Debug;
@@ -895,8 +918,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Markus Haas (5P499J9SM4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Markus Haas (5P499J9SM4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -904,7 +927,7 @@
 				INFOPLIST_FILE = BuddysINTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b2a988d0-f8f4-4b5e-b10b-a6ca1cd1e1a0";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuddysIN.app/BuddysIN";
 			};
 			name = Release;
