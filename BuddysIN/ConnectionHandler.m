@@ -4,9 +4,7 @@
 #import "JSON.h"
 #import "AppDelegate.h"
 #import <AdSupport/ASIdentifierManager.h>
-#import "AFJSONRequestOperation.h"
 #import "AFNetworkActivityIndicatorManager.h"
-#import "AFHTTPClient.h"
 #import "Constant.h"
 #import "BuddysINUtil.h"
 
@@ -52,66 +50,66 @@
 
 #pragma mark - AFNetwork
 
--(void)makePOSTRequestPath:(NSString *)path parameters:(NSDictionary *)parameters
-{
-   // NSLog(@"parameters: %@",parameters);
-    
-    if (![self hasConnectivity]) {
-        [BuddysINUtil showAlertWithTitle:@"No Connectivity" message:@"Please check the Internet Connnection"];
-        return;
-    }
-    
-    
-    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-    [[AFNetworkActivityIndicatorManager sharedManager] incrementActivityCount];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    [appDelegate.httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [appDelegate.httpClient setDefaultHeader:@"Accept" value:@"application/json"];
-    [appDelegate.httpClient setDefaultHeader:@"Accept" value:@"text/json"];
-    [appDelegate.httpClient setDefaultHeader:@"Accept" value:@"text/html"];
-    [appDelegate.httpClient setDefaultHeader:@"Content-type" value:@"application/json"];
-
-    [appDelegate.httpClient setParameterEncoding:AFFormURLParameterEncoding];
-    
-    [appDelegate.httpClient postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
-         
-      /*   if (operation.response.statusCode == 200) {//able to get results here */
-             NSString *responseString = [operation responseString]; //[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             //NSLog(@"Request Successful, response '%@'", responseString);
- 
-         NSError *error;
-         NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData: [responseString dataUsingEncoding:NSUTF8StringEncoding]
-                                                                      options: NSJSONReadingMutableContainers
-                                                                        error: &error];
-         
-             if ([path isEqualToString:kRegistrationURL]) {
-                 
-                 NSDictionary *usersdict = [responseDict objectForKey:@"fbc"];
-                 NSInteger statusInt = [[usersdict objectForKey:@"status"] integerValue]; // 1 = INSERTED, 2= UPDATED
-
-                // NSLog(@"Request Successful, RegistrationURL response '%@'", responseString);
-                [self.delegate connHandlerClient:self didSucceedWithResponseStatus:statusInt];
-             }
-             else if ([path isEqualToString:kNearByUserURL]) {
-             
-             // NSLog(@"Request Successful, kNearByUserURL response '%@'", responseString);
-             [self.delegate connHandlerClient:self didSucceedWithResponseString:responseString forPath:kNearByUserURL];
-         }
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         NSLog(@"[HTTPClient Error]: %@", error);
-         [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
-         
-         //delegate
-         [self.delegate connHandlerClient:self didFailWithError:error];
-         
-     }];
-    
-}
+//-(void)makePOSTRequestPath:(NSString *)path parameters:(NSDictionary *)parameters
+//{
+//   // NSLog(@"parameters: %@",parameters);
+//    
+//    if (![self hasConnectivity]) {
+//        [BuddysINUtil showAlertWithTitle:@"No Connectivity" message:@"Please check the Internet Connnection"];
+//        return;
+//    }
+//    
+//    
+//    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+//    [[AFNetworkActivityIndicatorManager sharedManager] incrementActivityCount];
+//    
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    
+//    [appDelegate.httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+//    [appDelegate.httpClient setDefaultHeader:@"Accept" value:@"application/json"];
+//    [appDelegate.httpClient setDefaultHeader:@"Accept" value:@"text/json"];
+//    [appDelegate.httpClient setDefaultHeader:@"Accept" value:@"text/html"];
+//    [appDelegate.httpClient setDefaultHeader:@"Content-type" value:@"application/json"];
+//
+//    [appDelegate.httpClient setParameterEncoding:AFFormURLParameterEncoding];
+//    
+//    [appDelegate.httpClient postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+//     {
+//         [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+//         
+//      /*   if (operation.response.statusCode == 200) {//able to get results here */
+//             NSString *responseString = [operation responseString]; //[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//             //NSLog(@"Request Successful, response '%@'", responseString);
+// 
+//         NSError *error;
+//         NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData: [responseString dataUsingEncoding:NSUTF8StringEncoding]
+//                                                                      options: NSJSONReadingMutableContainers
+//                                                                        error: &error];
+//         
+//             if ([path isEqualToString:kRegistrationURL]) {
+//                 
+//                 NSDictionary *usersdict = [responseDict objectForKey:@"fbc"];
+//                 NSInteger statusInt = [[usersdict objectForKey:@"status"] integerValue]; // 1 = INSERTED, 2= UPDATED
+//
+//                // NSLog(@"Request Successful, RegistrationURL response '%@'", responseString);
+//                [self.delegate connHandlerClient:self didSucceedWithResponseStatus:statusInt];
+//             }
+//             else if ([path isEqualToString:kNearByUserURL]) {
+//             
+//             // NSLog(@"Request Successful, kNearByUserURL response '%@'", responseString);
+//             [self.delegate connHandlerClient:self didSucceedWithResponseString:responseString forPath:kNearByUserURL];
+//         }
+//     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+//     {
+//         NSLog(@"[HTTPClient Error]: %@", error);
+//         [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+//         
+//         //delegate
+//         [self.delegate connHandlerClient:self didFailWithError:error];
+//         
+//     }];
+//    
+//}
 
 //-(void)makePOSTVideoShareAtPath:(NSURL *)path parameters:(NSDictionary *)parameters {
 //    

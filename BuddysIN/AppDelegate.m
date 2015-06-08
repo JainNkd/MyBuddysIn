@@ -17,17 +17,12 @@
 @end
 
 @implementation AppDelegate
-@synthesize httpClient;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     //facebook
     [FBLoginView class];
-    
-    //http Client
-    NSURL *url = [NSURL URLWithString:kServerURL];
-    self.httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     //Location Pop up
     self.locationManager = [[CLLocationManager alloc] init];
@@ -50,7 +45,7 @@
     NSUserDefaults *defualt = [NSUserDefaults standardUserDefaults];
     BOOL isLoggedIn = [defualt boolForKey:kUSER_LOGGED_IN];
     
-    if(isLoggedIn)
+    if(!isLoggedIn)
     {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
        

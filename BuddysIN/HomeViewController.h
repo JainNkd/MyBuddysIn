@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "UCZProgressView.h";
+#import "UCZProgressView.h"
 
-#import "ConnectionHandler.h"
-
-@interface HomeViewController : UIViewController<ConnectionHandlerDelegate,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
+@interface HomeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
 {
 
     NSMutableArray *buddysList;

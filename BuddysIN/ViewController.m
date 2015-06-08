@@ -11,8 +11,7 @@
 #import "HomeViewController.h"
 #import "Constant.h"
 #import "BuddysINUtil.h"
-
-#import "ConnectionHandler.h"
+#import "AFNetworking.h"
 
 @interface ViewController ()
 {
@@ -60,8 +59,6 @@
             loginLabel.frame = CGRectMake(0, 0, 271, 37);
         }
     }
-    
-    
     
     self.loginButton.delegate = self;
     self.loginButton.readPermissions = @[@"public_profile",@"email",@"user_friends"];
@@ -130,13 +127,6 @@
     if(email.length ==0)
         email = @"";
     
-    //    For local
-    //        if(isNeedToLogin)
-    //        {
-    //            [SharedAppDelegate setSideMenu];
-    //            [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:kUSER_LOGGED_IN];
-    //        }
-    
     //For server
     if(isNeedToLogin){
         isNeedToLogin = FALSE;
@@ -145,11 +135,10 @@
         [dict setValue:kAPISecretValue forKey:kAPISecret];
         [dict setValue:email forKey:@"email"];
         [dict setValue:name forKey:@"name"];
-
+//kRegistrationURL
         
-        ConnectionHandler *connHandler = [[ConnectionHandler alloc] init];
-        connHandler.delegate = self;
-        [connHandler makePOSTRequestPath:kRegistrationURL parameters:dict];
+    //Put request here
+        [self loadFromServer:dict];
         }
 }
 
@@ -165,34 +154,43 @@
 
 
 
-#pragma mark - Connection
-
--(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseStatus:(NSUInteger)status {
-  NSLog(@"didSucceedWithResponseStatus:");
-    if(status == 1){
-        
-        [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:kUSER_LOGGED_IN];
-        HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-        
-        [self.navigationController pushViewController:homeView animated:YES];
-    }
-    else
-    {
-        [self resetFacebookInfo];
-        [BuddysINUtil showAlertWithTitle:@"Error" message:@"Something is wrong try again."
-                          cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
-    }
-
-}
-
--(void)connHandlerClient:(ConnectionHandler *)client didFailWithError:(NSError *)error
+- (void)loadFromServer:(NSDictionary*)dataDict
 {
-    NSLog(@"didFailWithError:%@",[error localizedDescription]);
-    [self resetFacebookInfo];
-    [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/json"];
+    
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/json"];
+    
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+    
+    
+    [manager POST:kRegistrationURL parameters:dataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *responseDict  = (NSDictionary*)responseObject;
+        NSLog(@"login Dict..%@",responseDict);
+        NSDictionary *usersdict = [responseDict objectForKey:@"fbc"];
+        NSInteger status = [[usersdict objectForKey:@"status"] integerValue]; // 1 = INSERTED, 2= UPDATED
+        if(status == 1){
+            
+            [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:kUSER_LOGGED_IN];
+            HomeViewController *homeView = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+            
+            [self.navigationController pushViewController:homeView animated:YES];
+        }
+        else
+        {
+            [self resetFacebookInfo];
+            [BuddysINUtil showAlertWithTitle:@"Error" message:@"Something is wrong try again."
+                              cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error %@", error);
+        [self resetFacebookInfo];
+        [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
+    }];
 }
-
-
 
 -(void)resetFacebookInfo
 {

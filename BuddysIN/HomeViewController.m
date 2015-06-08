@@ -13,13 +13,14 @@
 #import "UIImageView+AFNetworking.h"
 #import "Constant.h"
 #import "ViewController.h"
-#import "ConnectionHandler.h"
 #import "BuddysINUtil.h"
 
 #import "HomeCell.h"
 #import "Share.h"
 
 #import "AppDelegate.h"
+#import "AFNetworking.h"
+
 
 
 @interface HomeViewController ()
@@ -102,32 +103,27 @@
     [dict setValue:email forKey:@"email"];
     [dict setValue:latitute forKey:@"lat"];
     [dict setValue:longitute forKey:@"lon"];
-    [dict setValue:@"5000" forKey:@"radius"];
+    [dict setValue:@"99999" forKey:@"radius"];
     [dict setValue:@"0" forKey:@"start"];
     [dict setValue:@"50" forKey:@"end"];
     
     NSLog(@"dict near by...%@",dict);
-    ConnectionHandler *connHandler = [[ConnectionHandler alloc] init];
-    if(![connHandler hasConnectivity]){
+    if(![BuddysINUtil reachable])
+    {
         [self stopProgressLoader];
-    }
-    connHandler.delegate = self;
-    [connHandler makePOSTRequestPath:kNearByUserURL parameters:dict];
-}
-
-#pragma mark - Connection
-
--(void)connHandlerClient:(ConnectionHandler *)client didSucceedWithResponseString:(NSString *)response forPath:(NSString *)urlPath{
-    [self stopProgressLoader];
-    NSLog(@"connHandlerClient didSucceedWithResponseString : %@",response);
-    NSLog(@"loadAppContactsOnTable ******************");
-    if ([urlPath isEqualToString:kNearByUserURL]) {
-        NSLog(@"SUCCESS: All Data fetched");
-        
-        NSError *error;
-        NSDictionary* responseDict = [NSJSONSerialization JSONObjectWithData: [response dataUsingEncoding:NSUTF8StringEncoding]
-                                                                     options: NSJSONReadingMutableContainers
-                                                                       error: &error];
+    }else{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/json"];
+    
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/json"];
+    
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+    
+    
+    [manager POST:kNearByUserURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         [self stopProgressLoader];
+        NSDictionary *responseDict  = (NSDictionary*)responseObject;
         NSDictionary *nearByBuddysDict = [responseDict objectForKey:@"share"];
         NSInteger status = [[nearByBuddysDict objectForKey:@"status"] integerValue];
         NSArray *dataList = [nearByBuddysDict objectForKey:@"data"];
@@ -155,19 +151,20 @@
                 [BuddysINUtil showAlertWithTitle:@"" message:[nearByBuddysDict objectForKey:@"message"]];
                 break;
             default:
-                [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription]];
+                [BuddysINUtil showAlertWithTitle:@"Error" message:@"Something is wrong with apis."];
                 break;
         }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error %@", error);
+        
+        [self stopProgressLoader];
+        NSLog(@"didFailWithError:%@",[error localizedDescription]);
+        [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
+    }];
     }
 }
 
-
--(void)connHandlerClient:(ConnectionHandler *)client didFailWithError:(NSError *)error
-{
-    [self stopProgressLoader];
-    NSLog(@"didFailWithError:%@",[error localizedDescription]);
-    [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
-}
 
 -(void)reloadHistoryData
 {
@@ -231,8 +228,8 @@
     }
     else if(fileURL.length>0)
     {
-        ConnectionHandler *conection = [[ConnectionHandler alloc]init];
-        if (![conection hasConnectivity]) {
+       
+        if (![BuddysINUtil reachable]) {
             [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
         }
         else
@@ -253,7 +250,7 @@
                                                 }
                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
                                                     NSLog(@"failed loading");//'%@", error);
-                                                    [self.buddysTableView reloadData];
+//                                                    [self.buddysTableView reloadData];
                                                 }
              ];
         }
@@ -322,7 +319,7 @@
                         //                cell.playIcon.hidden = YES;
                     }];
                     
-                    [operation setDownloadProgressBlock:^(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+                    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead,long long totalBytesExpectedToRead) {
                         
                         // Draw the actual chart.
                         //            dispatch_async(dispatch_get_main_queue()
