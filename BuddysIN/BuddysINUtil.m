@@ -41,4 +41,49 @@
     
 }
 
+//Check file in document directory
++(BOOL)fileExist:(NSString*)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *localURL = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:localURL])
+        return YES;
+    else
+        return NO;
+    
+}
+
++(NSString*)localFileUrl:(NSString*)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *localURL = [[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    
+    return localURL;
+}
+
+//Internect Connectivity
+//Creating AlertView when Missing Network connectivity
++(BOOL)reachable
+{
+    Reachability *r = [Reachability reachabilityWithHostName:@"www.google.com"];
+    NetworkStatus internetStatus = [r currentReachabilityStatus];
+    if(internetStatus == NotReachable)
+    {
+        return NO;
+    }
+    return YES;
+}
+
++(BOOL)isWiFiConnected
+{
+    Reachability *r = [Reachability reachabilityForLocalWiFi];
+    NetworkStatus internetStatus = [r currentReachabilityStatus];
+    if(internetStatus == ReachableViaWiFi)
+    {
+        return YES;
+    }
+    return NO;
+}
+
 @end

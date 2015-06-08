@@ -7,12 +7,15 @@
 //
 
 #import "HomeViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <MediaPlayer/MediaPlayer.h>
+
 #import "UIImageView+AFNetworking.h"
 #import "Constant.h"
 #import "ViewController.h"
 #import "ConnectionHandler.h"
 #import "BuddysINUtil.h"
-#import <FacebookSDK/FacebookSDK.h>
+
 #import "HomeCell.h"
 #import "Share.h"
 
@@ -21,8 +24,9 @@
 
 @interface HomeViewController ()
 {
-UCZProgressView *progressView;
+    UCZProgressView *progressView;
 }
+@property (nonatomic, strong) NSMutableDictionary *videoDownloadsInProgress;
 @end
 
 @implementation HomeViewController
@@ -40,7 +44,7 @@ UCZProgressView *progressView;
     SharedAppDelegate.locationManager.delegate = self;
     [SharedAppDelegate.locationManager startUpdatingLocation];
     
-//    [self getNearByRecords];
+    //    [self getNearByRecords];
     // Do any additional setup after loading the view.
 }
 
@@ -63,7 +67,7 @@ UCZProgressView *progressView;
     [[NSUserDefaults standardUserDefaults]setValue:locLong forKey:kUSER_LONGITUTE];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
-     NSLog(@"locLat....%@,loclong....%@",locLat,locLong);
+    NSLog(@"locLat....%@,loclong....%@",locLat,locLong);
     
     if(isReloadBuddys)
     {
@@ -88,15 +92,19 @@ UCZProgressView *progressView;
     NSString* latitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LATITUTE];
     NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
     NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
+    
+    email = @"naveendungarwal2009@gmail.com";
+    latitute = @"12.938653";
+    longitute = @"77.571814";
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:kAPIKeyValue forKey:kAPIKey];
     [dict setValue:kAPISecretValue forKey:kAPISecret];
     [dict setValue:email forKey:@"email"];
     [dict setValue:latitute forKey:@"lat"];
     [dict setValue:longitute forKey:@"lon"];
-    [dict setValue:@"50" forKey:@"radius"];
+    [dict setValue:@"5000" forKey:@"radius"];
     [dict setValue:@"0" forKey:@"start"];
-    [dict setValue:@"10" forKey:@"end"];
+    [dict setValue:@"50" forKey:@"end"];
     
     NSLog(@"dict near by...%@",dict);
     ConnectionHandler *connHandler = [[ConnectionHandler alloc] init];
@@ -180,7 +188,20 @@ UCZProgressView *progressView;
     HomeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     Share *shareObj = [buddysList objectAtIndex:indexPath.row];
     
-    cell.buddyAuthName.text = shareObj.memberDetail.name;
+    //Progress Indicator
+    for(UIView *view in cell.subviews)
+    {
+        if([view isKindOfClass:[UCZProgressView class]])
+        {
+            UCZProgressView *cellProgressView = (UCZProgressView*)view;
+            if(cellProgressView.tag == indexPath.row)
+                cellProgressView.hidden = NO;
+            else
+                cellProgressView.hidden = YES;
+        }
+    }
+    
+    cell.buddyAuthName.text = [NSString stringWithFormat:@"@%@",shareObj.memberDetail.name];
     cell.buddysTitleLbl.text = shareObj.content;
     if(shareObj.distance.length>3)
         cell.distanceLbl.text = [shareObj.distance substringToIndex:4];
@@ -245,6 +266,104 @@ UCZProgressView *progressView;
     return cell;
 }
 
+//cell selection handler
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    Share *share = [buddysList objectAtIndex:indexPath.row];
+    NSLog(@"dataType...%@",share.dataType);
+    if([share.dataType integerValue] == 1)
+    {
+        
+    }
+    else if ([share.dataType integerValue] == 2){
+        
+        AFHTTPRequestOperation *operation = (self.videoDownloadsInProgress)[indexPath];
+        
+        if([BuddysINUtil fileExist:share.videoName] && !operation)
+        {
+            [self playMovie:[BuddysINUtil localFileUrl:share.videoName]];
+        }
+        else
+        {
+            //        [self setBlurView:cell.blurView flag:YES];
+            if([BuddysINUtil reachable])
+            {
+                NSString *localURL = [BuddysINUtil localFileUrl:share.videoName];
+                if(!operation){
+                    
+                    UCZProgressView *cellProgressView;
+                    cellProgressView = [[UCZProgressView alloc]initWithFrame:CGRectMake(0,0,320,210)];
+                    cellProgressView.tag = indexPath.row;
+                    cellProgressView.indeterminate = YES;
+                    cellProgressView.showsText = YES;
+                    cellProgressView.tintColor = [UIColor whiteColor];
+                    
+                    [cell addSubview:cellProgressView];
+                    
+                    
+                    NSString *urlString = share.videoURL;
+                    
+                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+                    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request ];
+                    
+                    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:localURL append:YES];
+                    
+                    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"Successfully downloaded file to %@", localURL);
+                        [cellProgressView removeFromSuperview];
+                        //                [self setBlurView:cell.blurView flag:NO];
+                        [self.videoDownloadsInProgress removeObjectForKey:indexPath];
+                        
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                        //                cell.downloadIcon.hidden = NO;
+                        //                cell.playIcon.hidden = YES;
+                    }];
+                    
+                    [operation setDownloadProgressBlock:^(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+                        
+                        // Draw the actual chart.
+                        //            dispatch_async(dispatch_get_main_queue()
+                        //                           , ^(void) {
+                        cellProgressView.progress = (float)totalBytesRead / totalBytesExpectedToRead;
+                        //                               [cell layoutSubviews];
+                        //                           });
+                        
+                    }];
+                    
+                    (self.videoDownloadsInProgress)[indexPath] = operation;
+                    [operation start];
+                }
+            }
+            else{
+                NSLog(@"No internet connectivity");
+            }
+        }
+    }
+}
+
+
+-(void)playMovie: (NSString *) path{
+    
+    NSURL *url = [NSURL fileURLWithPath:path];
+    MPMoviePlayerViewController *theMovie = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+    theMovie.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+    [self presentMoviePlayerViewControllerAnimated:theMovie];
+    theMovie.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallBack:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    
+    [theMovie.moviePlayer play];
+}
+
+- (void)movieFinishedCallBack:(NSNotification *) aNotification {
+    MPMoviePlayerController *mPlayer = [aNotification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:mPlayer];
+    [mPlayer stop];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -252,6 +371,10 @@ UCZProgressView *progressView;
 
 
 - (IBAction)addVideoButtonAction:(id)sender {
+    [buddysList removeAllObjects];
+    [self.buddysTableView reloadData];
+    isReloadBuddys = TRUE;
+    [SharedAppDelegate.locationManager startUpdatingLocation];
 }
 
 - (IBAction)logOutButtonAction:(UIButton *)sender {
@@ -265,16 +388,17 @@ UCZProgressView *progressView;
     
 }
 
+
 -(void)startProgressLoader
 {
     if(!progressView){
-    progressView = [[UCZProgressView alloc]initWithFrame:self.view.frame];
-    progressView.indeterminate = YES;
-    progressView.showsText = NO;
-    progressView.backgroundColor = [UIColor clearColor];
-    progressView.opaque = 0.5;
-    progressView.alpha = 0.5;
-    [self.view addSubview:progressView];
+        progressView = [[UCZProgressView alloc]initWithFrame:self.view.frame];
+        progressView.indeterminate = YES;
+        progressView.showsText = NO;
+        progressView.backgroundColor = [UIColor clearColor];
+        progressView.opaque = 0.5;
+        progressView.alpha = 0.5;
+        [self.view addSubview:progressView];
     }
 }
 
@@ -282,6 +406,6 @@ UCZProgressView *progressView;
 {
     [progressView removeFromSuperview];
     progressView = nil;
-
+    
 }
 @end
