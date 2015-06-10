@@ -47,9 +47,11 @@ static int initialPage = 1;
     buddysList = [[NSMutableArray alloc]init];
     self.currentPage = initialPage;
     
-    NSLog(@"buddys record.....%@",[DatabaseMethods getAllBuddysRecords]);
-    Share *sharObj = [[DatabaseMethods getAllBuddysRecords]objectAtIndex:0];
-    NSLog(@"%@.....%@",sharObj.memberDetail.name,sharObj.content);
+//    NSLog(@"buddys record.....%@",[DatabaseMethods getAllBuddysRecords]);
+//    Share *sharObj = [[DatabaseMethods getAllBuddysRecords]objectAtIndex:0];
+//    NSLog(@"%@.....%@",sharObj.memberDetail.name,sharObj.content);
+    
+    self.buddysList = [DatabaseMethods getAllBuddysRecords];
 
     self.navigationController.navigationBarHidden = YES;
     self.nameLabel.text = [NSString stringWithFormat:@"@%@",[[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME] ];
@@ -90,7 +92,7 @@ static int initialPage = 1;
         __weak HomeViewController *weakSelf = self;
         
         weakSelf.currentPage = initialPage; // reset the page
-        [weakSelf.buddysList removeAllObjects]; // remove all data
+//        [weakSelf.buddysList removeAllObjects]; // remove all data
         [weakSelf.buddysTableView reloadData]; // before load new content, clear the existing table list
         [weakSelf getNearByRecords]; // load new data
         [weakSelf.buddysTableView.pullToRefreshView stopAnimating]; // clear the animation
@@ -182,7 +184,7 @@ static int initialPage = 1;
                 {
                     
                     Share *shareObj = [[Share alloc]initWithDict:dataDict];
-                    [self.buddysList addObject:shareObj];
+//                    [self.buddysList addObject:shareObj];
                     
                     if(![DatabaseMethods checkIfBuddysRecordExists:[shareObj.shareID integerValue]])
                     {
@@ -229,6 +231,8 @@ static int initialPage = 1;
 - (void)reloadTableView:(NSInteger)startingRow;
 {
     NSLog(@"curren row..%ld",(long)startingRow);
+    [self.buddysList removeAllObjects];
+    self.buddysList = [DatabaseMethods getAllBuddysRecords];
     // the last row after added new items
     NSInteger endingRow = [self.buddysList count];
     
@@ -437,7 +441,8 @@ static int initialPage = 1;
 
 
 - (IBAction)addVideoButtonAction:(id)sender {
-    [buddysList removeAllObjects];
+//    [buddysList removeAllObjects];
+    
     [self.buddysTableView reloadData];
     isReloadBuddys = TRUE;
     [SharedAppDelegate.locationManager startUpdatingLocation];
