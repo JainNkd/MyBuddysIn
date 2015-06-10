@@ -17,6 +17,7 @@
 
 #import "HomeCell.h"
 #import "Share.h"
+#import "DatabaseMethods.h"
 
 #import "AppDelegate.h"
 #import "AFNetworking.h"
@@ -45,6 +46,10 @@ static int initialPage = 1;
     
     buddysList = [[NSMutableArray alloc]init];
     self.currentPage = initialPage;
+    
+    NSLog(@"buddys record.....%@",[DatabaseMethods getAllBuddysRecords]);
+    Share *sharObj = [[DatabaseMethods getAllBuddysRecords]objectAtIndex:0];
+    NSLog(@"%@.....%@",sharObj.memberDetail.name,sharObj.content);
 
     self.navigationController.navigationBarHidden = YES;
     self.nameLabel.text = [NSString stringWithFormat:@"@%@",[[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME] ];
@@ -119,9 +124,9 @@ static int initialPage = 1;
     NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
     NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
     
-//    email = @"naveendungarwal2009@gmail.com";
-//    latitute = @"12.938653";
-//    longitute = @"77.571814";
+    email = @"naveendungarwal2009@gmail.com";
+    latitute = @"12.938653";
+    longitute = @"77.571814";
     
     NSInteger start = _currentPage*5-5;
     NSInteger end = start+5;
@@ -179,10 +184,10 @@ static int initialPage = 1;
                     Share *shareObj = [[Share alloc]initWithDict:dataDict];
                     [self.buddysList addObject:shareObj];
                     
-                    //                    if(![DatabaseMethods checkIfHistoryVideoExists:[videoDetailObj.videoID integerValue]])
-                    //                    {
-                    //                        [DatabaseMethods insertHistoryVideoInfoInDB:videoDetailObj];
-                    //                    }
+                    if(![DatabaseMethods checkIfBuddysRecordExists:[shareObj.shareID integerValue]])
+                    {
+                            [DatabaseMethods insertBuddysInfoInDB:shareObj];
+                    }
                 }
                 
 //                [self reloadHistoryData];

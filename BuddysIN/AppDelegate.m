@@ -11,6 +11,7 @@
 #import "HomeViewController.h"
 #import "Constant.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "DatabaseMethods.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //Dabase set up
+    [self checkAndCreateDatabase];
     
     //facebook
     [FBLoginView class];
@@ -45,7 +49,7 @@
     NSUserDefaults *defualt = [NSUserDefaults standardUserDefaults];
     BOOL isLoggedIn = [defualt boolForKey:kUSER_LOGGED_IN];
     
-    if(!isLoggedIn)
+    if(isLoggedIn)
     {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
        
@@ -68,6 +72,39 @@
 
     return YES;
 }
+
+//Check database and create a copy in Document Directory
+-(void) checkAndCreateDatabase{
+    // Check if the SQL database has already been saved to the users phone, if not then copy it over
+    BOOL success;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *databasePath=  [documentsDirectory stringByAppendingPathComponent:kDatabaseName];
+    
+    // Create a FileManager object, we will use this to check the status
+    // of the database and to copy it over if required
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // Check if the database has already been created in the users filesystem
+    success = [fileManager fileExistsAtPath:databasePath];
+    
+    // If the database already exists then return without doing anything
+    if(success)
+        return;
+    
+    // If not then proceed to copy the database from the application to the users filesystem
+    
+    // Get the path to the database in the application package
+    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kDatabaseName];
+    
+    // Copy the database from the package to the users filesystem
+    success = [fileManager copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
+    if(!success)
+        NSLog(@"Error while copying database");
+}
+
+
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     

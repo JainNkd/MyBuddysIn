@@ -24,6 +24,8 @@
 
 #define kUSER_LOGGED_IN @"USER_LOGGED_IN"
 
+// DB Table names
+#define kDatabaseName @"buddysIN.sqlite"
 
 
 

@@ -51,6 +51,10 @@
 		8B0793231B148991002CF70F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793191B148991002CF70F /* Default@2x.png */; };
 		8B07932A1B148D67002CF70F /* facebook-login-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793281B148D67002CF70F /* facebook-login-bg@2x.png */; };
 		8B07932B1B148D67002CF70F /* facebook-login-effectbg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0793291B148D67002CF70F /* facebook-login-effectbg@2x.png */; };
+		8B8BA0AB1B2801C3004727DD /* buddysIN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8B8BA0A91B2801C3004727DD /* buddysIN.sqlite */; };
+		8B8BA0AC1B2801C3004727DD /* DatabaseMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8BA0AA1B2801C3004727DD /* DatabaseMethods.m */; };
+		8B8BA0AF1B280245004727DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8BA0AD1B280245004727DD /* libsqlite3.0.dylib */; };
+		8B8BA0B01B280245004727DD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8BA0AE1B280245004727DD /* libsqlite3.dylib */; };
 		8BF2A0CB1B257CE400A61B54 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A0A71B257CE400A61B54 /* AFHTTPRequestOperation.m */; };
 		8BF2A0CC1B257CE400A61B54 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A0A91B257CE400A61B54 /* AFHTTPRequestOperationManager.m */; };
 		8BF2A0CD1B257CE400A61B54 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF2A0AB1B257CE400A61B54 /* AFHTTPSessionManager.m */; };
@@ -151,6 +155,11 @@
 		8B0793191B148991002CF70F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8B0793281B148D67002CF70F /* facebook-login-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-bg@2x.png"; sourceTree = "<group>"; };
 		8B0793291B148D67002CF70F /* facebook-login-effectbg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-effectbg@2x.png"; sourceTree = "<group>"; };
+		8B8BA0A81B2801B9004727DD /* DatabaseMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseMethods.h; path = Database/DatabaseMethods.h; sourceTree = "<group>"; };
+		8B8BA0A91B2801C3004727DD /* buddysIN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = buddysIN.sqlite; path = Database/buddysIN.sqlite; sourceTree = "<group>"; };
+		8B8BA0AA1B2801C3004727DD /* DatabaseMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseMethods.m; path = Database/DatabaseMethods.m; sourceTree = "<group>"; };
+		8B8BA0AD1B280245004727DD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		8B8BA0AE1B280245004727DD /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8BF2A0A61B257CE400A61B54 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		8BF2A0A71B257CE400A61B54 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		8BF2A0A81B257CE400A61B54 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -219,6 +228,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B8BA0AF1B280245004727DD /* libsqlite3.0.dylib in Frameworks */,
+				8B8BA0B01B280245004727DD /* libsqlite3.dylib in Frameworks */,
 				8BFFAA2B1B217F9500D13C27 /* CoreLocation.framework in Frameworks */,
 				87072A0B1B111E6B00C6FBAF /* FacebookSDK.framework in Frameworks */,
 			);
@@ -237,6 +248,8 @@
 		870729D81B111A7100C6FBAF = {
 			isa = PBXGroup;
 			children = (
+				8B8BA0AD1B280245004727DD /* libsqlite3.0.dylib */,
+				8B8BA0AE1B280245004727DD /* libsqlite3.dylib */,
 				8BFFAA2A1B217F9500D13C27 /* CoreLocation.framework */,
 				870729E31B111A7100C6FBAF /* BuddysIN */,
 				870729FD1B111A7100C6FBAF /* BuddysINTests */,
@@ -406,6 +419,7 @@
 		8B0792FC1B142B76002CF70F /* LIB */ = {
 			isa = PBXGroup;
 			children = (
+				8B8BA0A71B280185004727DD /* Database */,
 				8BF2A2171B25A15100A61B54 /* SVPullToRefresh */,
 				8BFFAA2C1B218A7D00D13C27 /* Connections */,
 				8BFFAA561B218A7E00D13C27 /* FXBlurView */,
@@ -437,6 +451,16 @@
 				8B0793191B148991002CF70F /* Default@2x.png */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		8B8BA0A71B280185004727DD /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				8B8BA0A91B2801C3004727DD /* buddysIN.sqlite */,
+				8B8BA0A81B2801B9004727DD /* DatabaseMethods.h */,
+				8B8BA0AA1B2801C3004727DD /* DatabaseMethods.m */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 		8BF2A0A51B257CE400A61B54 /* AFNetworking */ = {
@@ -663,6 +687,7 @@
 				87F04CDA1B1374D900085DB4 /* login_bg@2x.png in Resources */,
 				87F04CD81B1374D900085DB4 /* buddysin-60@2x.png in Resources */,
 				8B07932B1B148D67002CF70F /* facebook-login-effectbg@2x.png in Resources */,
+				8B8BA0AB1B2801C3004727DD /* buddysIN.sqlite in Resources */,
 				87F04CD51B1374D900085DB4 /* buddysin-29@3x.png in Resources */,
 				87B41F9A1B1F84AC003ACCEE /* button_plus@2x.png in Resources */,
 				8B0793211B148991002CF70F /* redbg@2x.png in Resources */,
@@ -731,6 +756,7 @@
 				8B0792FF1B142B8D002CF70F /* ConnectionHandler.m in Sources */,
 				8BFFAA681B218A7E00D13C27 /* NSObject+SBJSON.m in Sources */,
 				8BF2A0CE1B257CE400A61B54 /* AFNetworkReachabilityManager.m in Sources */,
+				8B8BA0AC1B2801C3004727DD /* DatabaseMethods.m in Sources */,
 				8BF2A0D21B257CE400A61B54 /* AFURLResponseSerialization.m in Sources */,
 				8BFFAA6D1B218A7E00D13C27 /* SBJsonWriter.m in Sources */,
 			);
