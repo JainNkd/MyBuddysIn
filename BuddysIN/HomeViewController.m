@@ -47,12 +47,12 @@ static int initialPage = 1;
     buddysList = [[NSMutableArray alloc]init];
     self.currentPage = initialPage;
     
-//    NSLog(@"buddys record.....%@",[DatabaseMethods getAllBuddysRecords]);
-//    Share *sharObj = [[DatabaseMethods getAllBuddysRecords]objectAtIndex:0];
-//    NSLog(@"%@.....%@",sharObj.memberDetail.name,sharObj.content);
+    //    NSLog(@"buddys record.....%@",[DatabaseMethods getAllBuddysRecords]);
+    //    Share *sharObj = [[DatabaseMethods getAllBuddysRecords]objectAtIndex:0];
+    //    NSLog(@"%@.....%@",sharObj.memberDetail.name,sharObj.content);
     
     self.buddysList = [DatabaseMethods getAllBuddysRecords];
-
+    
     self.navigationController.navigationBarHidden = YES;
     self.nameLabel.text = [NSString stringWithFormat:@"@%@",[[NSUserDefaults standardUserDefaults]valueForKey:kUSER_NAME] ];
     
@@ -87,24 +87,48 @@ static int initialPage = 1;
     
     if(isReloadBuddys)
     {
-//        [self getNearByRecords];
+        //        [self getNearByRecords];
         [self startProgressLoader];
         __weak HomeViewController *weakSelf = self;
         
-        weakSelf.currentPage = initialPage; // reset the page
-//        [weakSelf.buddysList removeAllObjects]; // remove all data
-        [weakSelf.buddysTableView reloadData]; // before load new content, clear the existing table list
-        [weakSelf getNearByRecords]; // load new data
-        [weakSelf.buddysTableView.pullToRefreshView stopAnimating]; // clear the animation
+        if([BuddysINUtil reachable]){
+            weakSelf.currentPage = initialPage; // reset the page
+            [weakSelf.buddysList removeAllObjects]; // remove all data
+            [weakSelf.buddysTableView reloadData]; // before load new content, clear the existing table list
+            [weakSelf getNearByRecords:FALSE];
+        }
         
-        // once refresh, allow the infinite scroll again
-        weakSelf.buddysTableView.showsInfiniteScrolling = YES;
+        // refresh new data when pull the table list
+        [self.buddysTableView addPullToRefreshWithActionHandler:^{
+            
+            if([BuddysINUtil reachable]){
+                weakSelf.currentPage = initialPage; // reset the page
+                [weakSelf.buddysList removeAllObjects]; // remove all data
+                [weakSelf.buddysTableView reloadData]; // before load new content, clear the existing table list
+                [weakSelf getNearByRecords:FALSE]; // load new data
+                [weakSelf.buddysTableView.pullToRefreshView stopAnimating]; // clear the animation
+                // once refresh, allow the infinite scroll again
+                weakSelf.buddysTableView.showsInfiniteScrolling = YES;
+            }
+            else
+            {
+                [weakSelf.buddysTableView.pullToRefreshView stopAnimating];
+                [weakSelf.buddysTableView.infiniteScrollingView stopAnimating];
+            }
+        }];
         
         // load more content when scroll to the bottom most
         [self.buddysTableView addInfiniteScrollingWithActionHandler:^{
-            [weakSelf getNearByRecords];
+            if([BuddysINUtil reachable]){
+                [weakSelf getNearByRecords:TRUE];
+            }
+            else
+            {
+                [weakSelf.buddysTableView.pullToRefreshView stopAnimating];
+                [weakSelf.buddysTableView.infiniteScrollingView stopAnimating];
+            }
         }];
-
+        
         isReloadBuddys = FALSE;
     }
     
@@ -119,9 +143,9 @@ static int initialPage = 1;
     [[[UIAlertView alloc]initWithTitle:@"Opps." message:@"Can not find location." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Accept", nil] show];
 }
 
--(void)getNearByRecords
+-(void)getNearByRecords:(BOOL)isPaging
 {
-//    [self startProgressLoader];
+    //    [self startProgressLoader];
     NSString* latitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LATITUTE];
     NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
     NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
@@ -131,7 +155,7 @@ static int initialPage = 1;
     longitute = @"77.571814";
     
     NSInteger start = _currentPage*5-5;
-    NSInteger end = start+5;
+    NSInteger end = 5;
     NSLog(@"start...%d,,,End...%d",start,end);
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -149,74 +173,79 @@ static int initialPage = 1;
     {
         [self stopProgressLoader];
     }else{
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/json"];
-    
-    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/json"];
-    
-    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-    
-    
-    [manager POST:kNearByUserURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-         [self stopProgressLoader];
-        NSDictionary *responseDict  = (NSDictionary*)responseObject;
-        NSDictionary *nearByBuddysDict = [responseDict objectForKey:@"share"];
-        NSInteger status = [[nearByBuddysDict objectForKey:@"status"] integerValue];
-        NSArray *dataList = [nearByBuddysDict objectForKey:@"data"];
         
-        // if no more result
-        if ([[nearByBuddysDict objectForKey:@"data"] count] == 0) {
-            self.buddysTableView.showsInfiniteScrolling = NO; // stop the infinite scroll
-            return;
-        }
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/json"];
         
-        _currentPage++; // increase the page number
-        NSInteger currentRow = [self.buddysList count]; // keep the the index of last row before add new items into the list
-
-
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/json"];
         
-        switch (status) {
-            case 1:
-            {
-//                [self.buddysList removeAllObjects];
-                for(NSDictionary* dataDict in dataList)
-                {
-                    
-                    Share *shareObj = [[Share alloc]initWithDict:dataDict];
-//                    [self.buddysList addObject:shareObj];
-                    
-                    if(![DatabaseMethods checkIfBuddysRecordExists:[shareObj.shareID integerValue]])
-                    {
-                            [DatabaseMethods insertBuddysInfoInDB:shareObj];
-                    }
-                }
-                
-//                [self reloadHistoryData];
-                [self reloadTableView:currentRow];
-                break;
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+        
+        
+        [manager POST:kNearByUserURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self stopProgressLoader];
+            NSDictionary *responseDict  = (NSDictionary*)responseObject;
+            NSDictionary *nearByBuddysDict = [responseDict objectForKey:@"share"];
+            NSInteger status = [[nearByBuddysDict objectForKey:@"status"] integerValue];
+            NSArray *dataList = [nearByBuddysDict objectForKey:@"data"];
+            
+            // if no more result
+            if ([[nearByBuddysDict objectForKey:@"data"] count] == 0) {
+                self.buddysTableView.showsInfiniteScrolling = NO; // stop the infinite scroll
+                return;
             }
-            case -2:
-                [BuddysINUtil showAlertWithTitle:@"" message:[nearByBuddysDict objectForKey:@"message"]];
-                break;
-            default:
-                [BuddysINUtil showAlertWithTitle:@"Error" message:@"Something is wrong with apis."];
-                break;
-        }
-        
-        // clear the pull to refresh & infinite scroll, this 2 lines very important
-        
-        [self.buddysTableView.pullToRefreshView stopAnimating];
-        [self.buddysTableView.infiniteScrollingView stopAnimating];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error %@", error);
-        [self stopProgressLoader];
-        self.buddysTableView.showsInfiniteScrolling = NO;
-        NSLog(@"error %@", error);
-        NSLog(@"didFailWithError:%@",[error localizedDescription]);
-        [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
-    }];
+            
+            _currentPage++; // increase the page number
+            NSInteger currentRow = [self.buddysList count]; // keep the the index of last row before add new items into the list
+            
+            switch (status) {
+                case 1:
+                {
+                    //                [self.buddysList removeAllObjects];
+                    for(NSDictionary* dataDict in dataList)
+                    {
+                        
+                        Share *shareObj = [[Share alloc]initWithDict:dataDict];
+                        //                    [self.buddysList addObject:shareObj];
+                        
+                        if(![DatabaseMethods checkIfBuddysRecordExists:[shareObj.shareID integerValue]])
+                        {
+                            [DatabaseMethods insertBuddysInfoInDB:shareObj];
+                        }
+                    }
+                    
+                    //                [self reloadHistoryData];
+                    break;
+                }
+                case -2:
+                    [BuddysINUtil showAlertWithTitle:@"" message:[nearByBuddysDict objectForKey:@"message"]];
+                    break;
+                default:
+                    [BuddysINUtil showAlertWithTitle:@"Error" message:@"Something is wrong with apis."];
+                    break;
+            }
+            
+            // clear the pull to refresh & infinite scroll, this 2 lines very important
+            
+            if(isPaging){
+                [self reloadTableView:currentRow];
+                //        [self.buddysTableView.pullToRefreshView stopAnimating];
+                [self.buddysTableView.infiniteScrollingView stopAnimating];
+            }
+            else
+            {
+                [self reloadTableView:0];
+                [self.buddysTableView.pullToRefreshView stopAnimating];
+                [self.buddysTableView.infiniteScrollingView stopAnimating];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error %@", error);
+            [self stopProgressLoader];
+            self.buddysTableView.showsInfiniteScrolling = NO;
+            NSLog(@"error %@", error);
+            NSLog(@"didFailWithError:%@",[error localizedDescription]);
+            [BuddysINUtil showAlertWithTitle:@"Error" message:[error localizedDescription] cancelBtnTitle:@"Accept" otherBtnTitle:nil delegate:nil tag:0];
+        }];
     }
 }
 
@@ -299,7 +328,7 @@ static int initialPage = 1;
     }
     else if(fileURL.length>0)
     {
-       
+        
         if (![BuddysINUtil reachable]) {
             [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
         }
@@ -316,14 +345,14 @@ static int initialPage = 1;
                                                     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:filename];
                                                     //Add the file name
                                                     if(image && filename.length>0){
-                                                    NSData *pngData = UIImagePNGRepresentation(image);
-                                                    [pngData writeToFile:filePath atomically:YES];
-                                                    [self.buddysTableView reloadData];
+                                                        NSData *pngData = UIImagePNGRepresentation(image);
+                                                        [pngData writeToFile:filePath atomically:YES];
+                                                        [self.buddysTableView reloadData];
                                                     }
                                                 }
                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
                                                     NSLog(@"failed loading");//'%@", error);
-//                                                    [self.buddysTableView reloadData];
+                                                    //                                                    [self.buddysTableView reloadData];
                                                 }
              ];
         }
@@ -441,11 +470,11 @@ static int initialPage = 1;
 
 
 - (IBAction)addVideoButtonAction:(id)sender {
-//    [buddysList removeAllObjects];
+    //    [buddysList removeAllObjects];
     
-    [self.buddysTableView reloadData];
-    isReloadBuddys = TRUE;
-    [SharedAppDelegate.locationManager startUpdatingLocation];
+    //    [self.buddysTableView reloadData];
+    //    isReloadBuddys = TRUE;
+    //    [SharedAppDelegate.locationManager startUpdatingLocation];
 }
 
 - (IBAction)logOutButtonAction:(UIButton *)sender {
