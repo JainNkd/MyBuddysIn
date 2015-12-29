@@ -23,6 +23,8 @@
 #import "AFNetworking.h"
 #import "SVPullToRefresh.h"
 
+#import "UIImageView+WebCache.h"
+
 static int initialPage = 1;
 
 
@@ -329,38 +331,67 @@ static int initialPage = 1;
     else if(fileURL.length>0)
     {
         
-        if (![BuddysINUtil reachable]) {
-            [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
-        }
-        else
-        {
+//        if (![BuddysINUtil reachable]) {
+//            [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
+//        }
+//        else
+//        {
+//            
+//            [cell.thumbnailImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:fileURL]] placeholderImage:[UIImage imageNamed:kDefaultImage]
+//                                                success:^(NSURLRequest *request , NSHTTPURLResponse *response , UIImage *image ){
+//                                                    NSLog(@"Loaded successfully.....%@",[request.URL absoluteString]);// %ld", (long)[response statusCode]);
+//                                                    
+//                                                    NSArray *ary = [[request.URL absoluteString] componentsSeparatedByString:@"/"];
+//                                                    NSString *filename = [ary lastObject];
+//                                                    
+//                                                    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:filename];
+//                                                    //Add the file name
+//                                                    if(image && filename.length>0){
+//                                                        NSData *pngData = UIImagePNGRepresentation(image);
+//                                                        [pngData writeToFile:filePath atomically:YES];
+//                                                        [self.buddysTableView reloadData];
+//                                                    }
+//                                                }
+//                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
+//                                                    NSLog(@"failed loading");//'%@", error);
+//                                                    //                                                    [self.buddysTableView reloadData];
+//                                                }
+//             ];
+//        }
+//    }else
+//    {
+//        [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
+//    }
+        
+        @try {
+            if(fileURL){
+                NSURL* url = [NSURL URLWithString:fileURL];
+                
+                [cell.thumbnailImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:kDefaultImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    
+                    if(image){
+//                        CGFloat th=(SCREEN_WIDTH*image.size.height)/image.size.width;
+//                        [self.feedImageView invalidateIntrinsicContentSize];
+//                        [self.imageHContraint setConstant:th];
+                        cell.thumbnailImage.image =image;
+                        [cell.contentView layoutIfNeeded];
+                        
+                    }
+                    else{
+//                        self.imageHContraint.constant=0.0;
+                    }
+                }];
+            }
+            else{
+//                self.feedImageView.hidden=YES;
+            }
             
-            [cell.thumbnailImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:fileURL]] placeholderImage:[UIImage imageNamed:kDefaultImage]
-                                                success:^(NSURLRequest *request , NSHTTPURLResponse *response , UIImage *image ){
-                                                    NSLog(@"Loaded successfully.....%@",[request.URL absoluteString]);// %ld", (long)[response statusCode]);
-                                                    
-                                                    NSArray *ary = [[request.URL absoluteString] componentsSeparatedByString:@"/"];
-                                                    NSString *filename = [ary lastObject];
-                                                    
-                                                    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:filename];
-                                                    //Add the file name
-                                                    if(image && filename.length>0){
-                                                        NSData *pngData = UIImagePNGRepresentation(image);
-                                                        [pngData writeToFile:filePath atomically:YES];
-                                                        [self.buddysTableView reloadData];
-                                                    }
-                                                }
-                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                                    NSLog(@"failed loading");//'%@", error);
-                                                    //                                                    [self.buddysTableView reloadData];
-                                                }
-             ];
         }
-    }else
-    {
-        [cell.thumbnailImage setImage:[UIImage imageNamed:kDefaultImage]];
+        @catch (NSException *exception) {
+            NSLog(@"Exception");
+        }
+
     }
-    
     
     return cell;
 }
