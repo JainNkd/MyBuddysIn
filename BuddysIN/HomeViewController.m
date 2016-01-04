@@ -156,8 +156,8 @@ static int initialPage = 1;
 //    latitute = @"8.22";
 //    longitute = @"77.7266284";
     
-    NSInteger start = _currentPage*50-50;
-    NSInteger end = 50;
+    NSInteger start = _currentPage*5-5;
+    NSInteger end = 5;
     NSLog(@"start...%d,,,End...%d",start,end);
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -302,7 +302,7 @@ static int initialPage = 1;
         }
     }
     
-    cell.buddyAuthName.text = [NSString stringWithFormat:@"@%@",shareObj.memberDetail.name];
+    cell.buddyAuthName.text = [NSString stringWithFormat:@"%@",shareObj.memberDetail.name];
     cell.buddysTitleLbl.text = shareObj.content;
     if(shareObj.distance.length>3)
         cell.distanceLbl.text = [shareObj.distance substringToIndex:4];
