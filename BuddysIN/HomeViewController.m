@@ -152,12 +152,12 @@ static int initialPage = 1;
     NSString* longitute = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_LONGITUTE];
     NSString *email = [[NSUserDefaults standardUserDefaults]valueForKey:kUSER_EMAIL];
     
-//    email = @"naveendungarwal2009@gmail.com";
-//    latitute = @"12.938653";
-//    longitute = @"77.571814";
+//    email = @"sekar@aumkii.com";
+//    latitute = @"8.22";
+//    longitute = @"77.7266284";
     
-    NSInteger start = _currentPage*5-5;
-    NSInteger end = 5;
+    NSInteger start = _currentPage*50-50;
+    NSInteger end = 50;
     NSLog(@"start...%d,,,End...%d",start,end);
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -177,7 +177,7 @@ static int initialPage = 1;
     }else{
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//        manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/json"];
         
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/json"];
@@ -188,6 +188,7 @@ static int initialPage = 1;
         [manager POST:kNearByUserURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self stopProgressLoader];
             NSDictionary *responseDict  = (NSDictionary*)responseObject;
+            NSLog(@"responsedict..%@",responseDict);
             NSDictionary *nearByBuddysDict = [responseDict objectForKey:@"share"];
             NSInteger status = [[nearByBuddysDict objectForKey:@"status"] integerValue];
             NSArray *dataList = [nearByBuddysDict objectForKey:@"data"];
